@@ -15,6 +15,7 @@ struct ProductDetailView: View {
 
     @Query private var merchants: [Merchant]
     @Query private var brands: [Brand]
+    @Query(sort: \ProductRecord.name) private var existingProducts: [ProductRecord]
 
     @State private var isEditing = false
     @State private var editName = ""
@@ -43,6 +44,25 @@ struct ProductDetailView: View {
 
     var unitPrice: Double {
         editQuantity > 0 ? editTotalPrice / editQuantity : 0
+    }
+
+    // 获取已有的商品名称建议（去重）
+    var existingProductNames: [String] {
+        let names = existingProducts.map { $0.name }
+        return Array(Set(names)).sorted()
+    }
+
+    // 获取已有的品牌建议
+    var existingBrandsList: [String] {
+        let brandsFromModel = brands.map { $0.name }
+        let brandsFromProducts = existingProducts.compactMap { $0.brand }
+        return Array(Set(brandsFromModel + brandsFromProducts)).sorted()
+    }
+
+    // 获取已有的规格建议
+    var existingSpecs: [String] {
+        let specs = existingProducts.compactMap { $0.spec }
+        return Array(Set(specs)).sorted()
     }
 
     var body: some View {
@@ -147,15 +167,49 @@ struct ProductDetailView: View {
     private var editForm: some View {
         VStack(spacing: 16) {
             DetailGroup(title: "商品信息") {
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: 8) {
                     Text("名称")
                         .font(.caption)
                         .foregroundColor(.secondary)
                     TextField("商品名称", text: $editName)
                         .textFieldStyle(.roundedBorder)
+
+                    // 商品名称建议
+                    let filteredNames = existingProductNames.filter {
+                        !editName.isEmpty && $0.localizedCaseInsensitiveContains(editName)
+                    }.prefix(6)
+                    if !filteredNames.isEmpty {
+                        VStack(alignment: .leading, spacing: 0) {
+                            ForEach(Array(filteredNames), id: \.self) { suggestion in
+                                Button(action: {
+                                    editName = suggestion
+                                }) {
+                                    HStack {
+                                        Text(suggestion)
+                                            .foregroundColor(.primary)
+                                        Spacer()
+                                        if editName == suggestion {
+                                            Image(systemName: "checkmark")
+                                                .foregroundColor(.blue)
+                                        }
+                                    }
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 10)
+                                    .contentShape(Rectangle())
+                                }
+                                .buttonStyle(.plain)
+
+                                if suggestion != filteredNames.last {
+                                    Divider()
+                                }
+                            }
+                        }
+                        .background(Color.gray.opacity(0.15))
+                        .cornerRadius(8)
+                    }
                 }
 
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: 8) {
                     Text("品牌")
                         .font(.caption)
                         .foregroundColor(.secondary)
@@ -172,9 +226,44 @@ struct ProductDetailView: View {
                             }
                         }
                     }
+
+                    // 品牌建议
+                    let brandText = editBrand ?? ""
+                    let filteredBrands = existingBrandsList.filter {
+                        !brandText.isEmpty && $0.localizedCaseInsensitiveContains(brandText)
+                    }.prefix(6)
+                    if !filteredBrands.isEmpty {
+                        VStack(alignment: .leading, spacing: 0) {
+                            ForEach(Array(filteredBrands), id: \.self) { suggestion in
+                                Button(action: {
+                                    editBrand = suggestion
+                                }) {
+                                    HStack {
+                                        Text(suggestion)
+                                            .foregroundColor(.primary)
+                                        Spacer()
+                                        if editBrand == suggestion {
+                                            Image(systemName: "checkmark")
+                                                .foregroundColor(.blue)
+                                        }
+                                    }
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 10)
+                                    .contentShape(Rectangle())
+                                }
+                                .buttonStyle(.plain)
+
+                                if suggestion != filteredBrands.last {
+                                    Divider()
+                                }
+                            }
+                        }
+                        .background(Color.gray.opacity(0.15))
+                        .cornerRadius(8)
+                    }
                 }
 
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: 8) {
                     Text("规格")
                         .font(.caption)
                         .foregroundColor(.secondary)
@@ -183,6 +272,41 @@ struct ProductDetailView: View {
                         set: { editSpec = $0.isEmpty ? nil : $0 }
                     ))
                     .textFieldStyle(.roundedBorder)
+
+                    // 规格建议
+                    let specText = editSpec ?? ""
+                    let filteredSpecs = existingSpecs.filter {
+                        !specText.isEmpty && $0.localizedCaseInsensitiveContains(specText)
+                    }.prefix(6)
+                    if !filteredSpecs.isEmpty {
+                        VStack(alignment: .leading, spacing: 0) {
+                            ForEach(Array(filteredSpecs), id: \.self) { suggestion in
+                                Button(action: {
+                                    editSpec = suggestion
+                                }) {
+                                    HStack {
+                                        Text(suggestion)
+                                            .foregroundColor(.primary)
+                                        Spacer()
+                                        if editSpec == suggestion {
+                                            Image(systemName: "checkmark")
+                                                .foregroundColor(.blue)
+                                        }
+                                    }
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 10)
+                                    .contentShape(Rectangle())
+                                }
+                                .buttonStyle(.plain)
+
+                                if suggestion != filteredSpecs.last {
+                                    Divider()
+                                }
+                            }
+                        }
+                        .background(Color.gray.opacity(0.15))
+                        .cornerRadius(8)
+                    }
                 }
             }
 

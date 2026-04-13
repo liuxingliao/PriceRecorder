@@ -68,7 +68,6 @@ struct FormNumberField: View {
                 .font(.caption)
                 .foregroundColor(.secondary)
             TextField(placeholder, value: $value, format: .number)
-                .keyboardType(.decimalPad)
                 .textFieldStyle(.roundedBorder)
         }
     }
@@ -148,5 +147,61 @@ struct EmptyStateView: View {
             }
         }
         .padding()
+    }
+}
+
+// MARK: - 带建议的输入框组件
+struct SuggestionTextField: View {
+    let title: String
+    let placeholder: String
+    @Binding var text: String
+    let suggestions: [String]
+
+    var filteredSuggestions: [String] {
+        guard !text.isEmpty else { return [] }
+        return Array(suggestions.filter {
+            $0.localizedCaseInsensitiveContains(text)
+        }.prefix(6))
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(title)
+                .font(.caption)
+                .foregroundColor(.secondary)
+
+            TextField(placeholder, text: $text)
+                .textFieldStyle(.roundedBorder)
+
+            if !filteredSuggestions.isEmpty {
+                VStack(alignment: .leading, spacing: 0) {
+                    ForEach(filteredSuggestions, id: \.self) { suggestion in
+                        Button(action: {
+                            text = suggestion
+                        }) {
+                            HStack {
+                                Text(suggestion)
+                                    .foregroundColor(.primary)
+                                Spacer()
+                                if text == suggestion {
+                                    Image(systemName: "checkmark")
+                                        .foregroundColor(.blue)
+                                }
+                            }
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 10)
+                            .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.plain)
+
+                        if suggestion != filteredSuggestions.last {
+                            Divider()
+                        }
+                    }
+                }
+                .background(Color.gray.opacity(0.15))
+                .cornerRadius(8)
+            }
+        }
     }
 }

@@ -382,6 +382,8 @@ struct PendingProductRow: View {
 
 struct ProductEditSheet: View {
     @Environment(\.dismiss) private var dismiss
+    @Query(sort: \ProductRecord.name) private var existingProducts: [ProductRecord]
+
     let product: PendingProduct
     let brands: [Brand]
     let onSave: (PendingProduct) -> Void
@@ -411,65 +413,247 @@ struct ProductEditSheet: View {
         quantity > 0 ? totalPrice / quantity : 0
     }
 
+    // 获取已有的商品名称建议（去重）
+    var existingProductNames: [String] {
+        Array(Set(existingProducts.map { $0.name })).sorted()
+    }
+
+    // 获取已有的品牌建议
+    var existingBrands: [String] {
+        let brandsFromModel = brands.map { $0.name }
+        let brandsFromProducts = existingProducts.compactMap { $0.brand }
+        return Array(Set(brandsFromModel + brandsFromProducts)).sorted()
+    }
+
+    // 获取已有的规格建议
+    var existingSpecs: [String] {
+        Array(Set(existingProducts.compactMap { $0.spec })).sorted()
+    }
+
     var body: some View {
         NavigationStack {
-            Form {
-                Section("商品信息") {
-                    TextField("商品名称", text: $name)
-                    TextField("品牌（可选）", text: Binding(
-                        get: { brand ?? "" },
-                        set: { brand = $0.isEmpty ? nil : $0 }
-                    ))
-                    TextField("规格（可选）", text: Binding(
-                        get: { spec ?? "" },
-                        set: { spec = $0.isEmpty ? nil : $0 }
-                    ))
-                }
+            ScrollView {
+                VStack(spacing: 20) {
+                    // 商品信息区域
+                    VStack(alignment: .leading, spacing: 16) {
+                        Text("商品信息")
+                            .font(.headline)
+                            .foregroundColor(.secondary)
 
-                Section("价格信息") {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("数量")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                            TextField("", value: $quantity, format: .number)
-                                .keyboardType(.decimalPad)
-                                .textFieldStyle(.roundedBorder)
-                        }
+                        VStack(spacing: 12) {
+                            // 商品名称
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text("商品名称")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                TextField("商品名称", text: $name)
+                                    .textFieldStyle(.roundedBorder)
 
-                        VStack(alignment: .leading) {
-                            Text("单位")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                            TextField("单位", text: $unit)
+                                // 商品名称建议
+                                let filteredNames = existingProductNames.filter {
+                                    !name.isEmpty && $0.localizedCaseInsensitiveContains(name)
+                                }.prefix(6)
+                                if !filteredNames.isEmpty {
+                                    VStack(alignment: .leading, spacing: 0) {
+                                        ForEach(Array(filteredNames), id: \.self) { suggestion in
+                                            Button(action: {
+                                                name = suggestion
+                                            }) {
+                                                HStack {
+                                                    Text(suggestion)
+                                                        .foregroundColor(.primary)
+                                                    Spacer()
+                                                    if name == suggestion {
+                                                        Image(systemName: "checkmark")
+                                                            .foregroundColor(.blue)
+                                                    }
+                                                }
+                                                .padding(.horizontal, 12)
+                                                .padding(.vertical, 10)
+                                                .contentShape(Rectangle())
+                                            }
+                                            .buttonStyle(.plain)
+
+                                            if suggestion != filteredNames.last {
+                                                Divider()
+                                            }
+                                        }
+                                    }
+                                    .background(Color.gray.opacity(0.15))
+                                    .cornerRadius(8)
+                                }
+                            }
+
+                            // 品牌
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text("品牌（可选）")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                TextField("品牌（可选）", text: Binding(
+                                    get: { brand ?? "" },
+                                    set: { brand = $0.isEmpty ? nil : $0 }
+                                ))
                                 .textFieldStyle(.roundedBorder)
+
+                                // 品牌建议
+                                let brandText = brand ?? ""
+                                let filteredBrands = existingBrands.filter {
+                                    !brandText.isEmpty && $0.localizedCaseInsensitiveContains(brandText)
+                                }.prefix(6)
+                                if !filteredBrands.isEmpty {
+                                    VStack(alignment: .leading, spacing: 0) {
+                                        ForEach(Array(filteredBrands), id: \.self) { suggestion in
+                                            Button(action: {
+                                                brand = suggestion
+                                            }) {
+                                                HStack {
+                                                    Text(suggestion)
+                                                        .foregroundColor(.primary)
+                                                    Spacer()
+                                                    if brand == suggestion {
+                                                        Image(systemName: "checkmark")
+                                                            .foregroundColor(.blue)
+                                                    }
+                                                }
+                                                .padding(.horizontal, 12)
+                                                .padding(.vertical, 10)
+                                                .contentShape(Rectangle())
+                                            }
+                                            .buttonStyle(.plain)
+
+                                            if suggestion != filteredBrands.last {
+                                                Divider()
+                                            }
+                                        }
+                                    }
+                                    .background(Color.gray.opacity(0.15))
+                                    .cornerRadius(8)
+                                }
+                            }
+
+                            // 规格
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text("规格（可选）")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                TextField("规格（可选）", text: Binding(
+                                    get: { spec ?? "" },
+                                    set: { spec = $0.isEmpty ? nil : $0 }
+                                ))
+                                .textFieldStyle(.roundedBorder)
+
+                                // 规格建议
+                                let specText = spec ?? ""
+                                let filteredSpecs = existingSpecs.filter {
+                                    !specText.isEmpty && $0.localizedCaseInsensitiveContains(specText)
+                                }.prefix(6)
+                                if !filteredSpecs.isEmpty {
+                                    VStack(alignment: .leading, spacing: 0) {
+                                        ForEach(Array(filteredSpecs), id: \.self) { suggestion in
+                                            Button(action: {
+                                                spec = suggestion
+                                            }) {
+                                                HStack {
+                                                    Text(suggestion)
+                                                        .foregroundColor(.primary)
+                                                    Spacer()
+                                                    if spec == suggestion {
+                                                        Image(systemName: "checkmark")
+                                                            .foregroundColor(.blue)
+                                                    }
+                                                }
+                                                .padding(.horizontal, 12)
+                                                .padding(.vertical, 10)
+                                                .contentShape(Rectangle())
+                                            }
+                                            .buttonStyle(.plain)
+
+                                            if suggestion != filteredSpecs.last {
+                                                Divider()
+                                            }
+                                        }
+                                    }
+                                    .background(Color.gray.opacity(0.15))
+                                    .cornerRadius(8)
+                                }
+                            }
                         }
+                        .padding()
+                        .background(Color(.systemGray6))
+                        .cornerRadius(10)
                     }
 
-                    VStack(alignment: .leading) {
-                        Text("总价")
-                            .font(.caption)
+                    // 价格信息区域
+                    VStack(alignment: .leading, spacing: 16) {
+                        Text("价格信息")
+                            .font(.headline)
                             .foregroundColor(.secondary)
-                        TextField("", value: $totalPrice, format: .currency(code: "CNY"))
-                            .keyboardType(.decimalPad)
+
+                        VStack(spacing: 12) {
+                            HStack(spacing: 12) {
+                                // 数量
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text("数量")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                    TextField("", value: $quantity, format: .number)
+                                        .textFieldStyle(.roundedBorder)
+                                }
+                                .frame(maxWidth: .infinity)
+
+                                // 单位
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text("单位")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                    TextField("单位", text: $unit)
+                                        .textFieldStyle(.roundedBorder)
+                                }
+                                .frame(maxWidth: .infinity)
+                            }
+
+                            // 总价
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("总价")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                TextField("", value: $totalPrice, format: .currency(code: "CNY"))
+                                    .textFieldStyle(.roundedBorder)
+                            }
+
+                            // 单价
+                            HStack {
+                                Text("单价")
+                                    .foregroundColor(.secondary)
+                                Spacer()
+                                Text(String(format: "¥%.2f/%@", unitPrice, unit))
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                        .padding()
+                        .background(Color(.systemGray6))
+                        .cornerRadius(10)
+                    }
+
+                    // 备注区域
+                    VStack(alignment: .leading, spacing: 16) {
+                        Text("备注")
+                            .font(.headline)
+                            .foregroundColor(.secondary)
+
+                        VStack(alignment: .leading, spacing: 4) {
+                            TextField("备注（可选）", text: Binding(
+                                get: { notes ?? "" },
+                                set: { notes = $0.isEmpty ? nil : $0 }
+                            ), axis: .vertical)
                             .textFieldStyle(.roundedBorder)
-                    }
-
-                    HStack {
-                        Text("单价")
-                            .foregroundColor(.secondary)
-                        Spacer()
-                        Text(String(format: "¥%.2f/%@", unitPrice, unit))
-                            .foregroundColor(.secondary)
+                        }
+                        .padding()
+                        .background(Color(.systemGray6))
+                        .cornerRadius(10)
                     }
                 }
-
-                Section("备注") {
-                    TextField("备注（可选）", text: Binding(
-                        get: { notes ?? "" },
-                        set: { notes = $0.isEmpty ? nil : $0 }
-                    ), axis: .vertical)
-                }
+                .padding()
             }
             .navigationTitle("编辑商品")
             .toolbar {
