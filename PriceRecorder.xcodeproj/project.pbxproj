@@ -1,0 +1,485 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA01 /* PriceRecorderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA02 /* PriceRecorderApp.swift */; };
+		AA03 /* ProductRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA04 /* ProductRecord.swift */; };
+		AA05 /* Merchant.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA06 /* Merchant.swift */; };
+		AA07 /* MerchantCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA08 /* MerchantCategory.swift */; };
+		AA09 /* Brand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0A /* Brand.swift */; };
+		AA0B /* Receipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0C /* Receipt.swift */; };
+		AA0D /* OCRService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0E /* OCRService.swift */; };
+		AA0F /* CSVService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA10 /* CSVService.swift */; };
+		AA11 /* CloudSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA12 /* CloudSyncService.swift */; };
+		AA13 /* CommonComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA14 /* CommonComponents.swift */; };
+		AA15 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16 /* HomeView.swift */; };
+		AA17 /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA18 /* ProductDetailView.swift */; };
+		AA19 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A /* SearchView.swift */; };
+		AA1B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1C /* SettingsView.swift */; };
+		AA1D /* MerchantManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1E /* MerchantManagementView.swift */; };
+		AA1F /* BrandManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA20 /* BrandManagementView.swift */; };
+		AA21 /* DataManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA22 /* DataManagementView.swift */; };
+		AA23 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA24 /* StatisticsView.swift */; };
+		AA25 /* ProductEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA26 /* ProductEntryView.swift */; };
+		AA27 /* PriceComparisonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA28 /* PriceComparisonView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AA02 /* PriceRecorderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceRecorderApp.swift; sourceTree = "<group>"; };
+		AA04 /* ProductRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRecord.swift; sourceTree = "<group>"; };
+		AA06 /* Merchant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Merchant.swift; sourceTree = "<group>"; };
+		AA08 /* MerchantCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantCategory.swift; sourceTree = "<group>"; };
+		AA0A /* Brand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brand.swift; sourceTree = "<group>"; };
+		AA0C /* Receipt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receipt.swift; sourceTree = "<group>"; };
+		AA0E /* OCRService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRService.swift; sourceTree = "<group>"; };
+		AA10 /* CSVService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVService.swift; sourceTree = "<group>"; };
+		AA12 /* CloudSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudSyncService.swift; sourceTree = "<group>"; };
+		AA14 /* CommonComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonComponents.swift; sourceTree = "<group>"; };
+		AA16 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		AA18 /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
+		AA1A /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		AA1C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AA1E /* MerchantManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantManagementView.swift; sourceTree = "<group>"; };
+		AA20 /* BrandManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandManagementView.swift; sourceTree = "<group>"; };
+		AA22 /* DataManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagementView.swift; sourceTree = "<group>"; };
+		AA24 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
+		AA26 /* ProductEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductEntryView.swift; sourceTree = "<group>"; };
+		AA28 /* PriceComparisonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceComparisonView.swift; sourceTree = "<group>"; };
+		AA2B /* PriceRecorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PriceRecorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AA2C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AA2D = {
+			isa = PBXGroup;
+			children = (
+				AA2E /* PriceRecorder */,
+				AA2F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AA2E /* PriceRecorder */ = {
+			isa = PBXGroup;
+			children = (
+				AA30 /* Models */,
+				AA31 /* Views */,
+				AA32 /* Services */,
+				AA33 /* Utils */,
+				AA02 /* PriceRecorderApp.swift */,
+			);
+			path = PriceRecorder;
+			sourceTree = "<group>";
+		};
+		AA2F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA2B /* PriceRecorder.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AA30 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AA04 /* ProductRecord.swift */,
+				AA06 /* Merchant.swift */,
+				AA08 /* MerchantCategory.swift */,
+				AA0A /* Brand.swift */,
+				AA0C /* Receipt.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AA31 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AA34 /* Components */,
+				AA35 /* Home */,
+				AA36 /* Search */,
+				AA37 /* Settings */,
+				AA38 /* ProductEntry */,
+				AA39 /* PriceComparison */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AA32 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				AA0E /* OCRService.swift */,
+				AA10 /* CSVService.swift */,
+				AA12 /* CloudSyncService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		AA33 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		AA34 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				AA14 /* CommonComponents.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		AA35 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				AA16 /* HomeView.swift */,
+				AA18 /* ProductDetailView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		AA36 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				AA1A /* SearchView.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		AA37 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				AA1C /* SettingsView.swift */,
+				AA1E /* MerchantManagementView.swift */,
+				AA20 /* BrandManagementView.swift */,
+				AA22 /* DataManagementView.swift */,
+				AA24 /* StatisticsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		AA38 /* ProductEntry */ = {
+			isa = PBXGroup;
+			children = (
+				AA26 /* ProductEntryView.swift */,
+			);
+			path = ProductEntry;
+			sourceTree = "<group>";
+		};
+		AA39 /* PriceComparison */ = {
+			isa = PBXGroup;
+			children = (
+				AA28 /* PriceComparisonView.swift */,
+			);
+			path = PriceComparison;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AA40 /* PriceRecorder */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA43 /* Build configuration list for PBXNativeTarget "PriceRecorder" */;
+			buildPhases = (
+				AA41 /* Sources */,
+				AA2C /* Frameworks */,
+				AA42 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PriceRecorder;
+			productName = PriceRecorder;
+			productReference = AA2B /* PriceRecorder.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA44 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					AA40 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = AA45 /* Build configuration list for PBXProject "PriceRecorder" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AA2D;
+			productRefGroup = AA2F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AA40 /* PriceRecorder */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AA42 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AA41 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA01 /* PriceRecorderApp.swift in Sources */,
+				AA03 /* ProductRecord.swift in Sources */,
+				AA05 /* Merchant.swift in Sources */,
+				AA07 /* MerchantCategory.swift in Sources */,
+				AA09 /* Brand.swift in Sources */,
+				AA0B /* Receipt.swift in Sources */,
+				AA0D /* OCRService.swift in Sources */,
+				AA0F /* CSVService.swift in Sources */,
+				AA11 /* CloudSyncService.swift in Sources */,
+				AA13 /* CommonComponents.swift in Sources */,
+				AA15 /* HomeView.swift in Sources */,
+				AA17 /* ProductDetailView.swift in Sources */,
+				AA19 /* SearchView.swift in Sources */,
+				AA1B /* SettingsView.swift in Sources */,
+				AA1D /* MerchantManagementView.swift in Sources */,
+				AA1F /* BrandManagementView.swift in Sources */,
+				AA21 /* DataManagementView.swift in Sources */,
+				AA23 /* StatisticsView.swift in Sources */,
+				AA25 /* ProductEntryView.swift in Sources */,
+				AA27 /* PriceComparisonView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AA46 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AA47 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AA48 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = N46G7G95DA;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "需要访问相机来拍摄小票照片";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "需要访问相册来选择小票照片";
+				INFOPLIST_KEY_UIApplicationSceneManifest_UIApplicationSupportsMultipleScenes = NO;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.PriceRecorder;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AA49 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = N46G7G95DA;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "需要访问相机来拍摄小票照片";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "需要访问相册来选择小票照片";
+				INFOPLIST_KEY_UIApplicationSceneManifest_UIApplicationSupportsMultipleScenes = NO;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.PriceRecorder;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA43 /* Build configuration list for PBXNativeTarget "PriceRecorder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA48 /* Debug */,
+				AA49 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA45 /* Build configuration list for PBXProject "PriceRecorder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA46 /* Debug */,
+				AA47 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AA44 /* Project object */;
+}
