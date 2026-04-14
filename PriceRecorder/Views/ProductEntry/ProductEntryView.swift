@@ -8,7 +8,6 @@
 import SwiftUI
 import SwiftData
 import Vision
-import UIKit
 
 struct ProductEntryView: View {
     @Environment(\.modelContext) private var modelContext
@@ -23,6 +22,7 @@ struct ProductEntryView: View {
     @State private var receiptPhoto: UIImage?
     @State private var showingMerchantSelector = false
     @State private var showingImagePicker = false
+    @State private var imagePickerSourceType: UIImagePickerController.SourceType = .photoLibrary
     @State private var showingSourceSelection = false
     @State private var showingAddMerchant = false
     @State private var isRecognizing = false
@@ -50,6 +50,28 @@ struct ProductEntryView: View {
                 entryModeSelection
             } else {
                 productEntryForm
+            }
+        }
+        .confirmationDialog("选择图片来源", isPresented: $showingSourceSelection) {
+            Button("拍照") {
+                imagePickerSourceType = .camera
+                showingImagePicker = true
+            }
+            Button("从相册选择") {
+                imagePickerSourceType = .photoLibrary
+                showingImagePicker = true
+            }
+            Button("取消", role: .cancel) { }
+        }
+        .sheet(isPresented: $showingImagePicker) {
+            ImagePicker(image: $receiptPhoto, sourceType: imagePickerSourceType) {
+                showingImagePicker = false
+            }
+        }
+        .onChange(of: receiptPhoto) { _, image in
+            if let image = image {
+                entryMode = .photo
+                recognizeText(from: image)
             }
         }
     }
@@ -86,7 +108,6 @@ struct ProductEntryView: View {
                 }
 
                 Button(action: {
-                    entryMode = .photo
                     pendingProducts = []
                     showingSourceSelection = true
                 }) {
@@ -121,25 +142,6 @@ struct ProductEntryView: View {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button("取消") {
                     dismiss()
-                }
-            }
-        }
-        .confirmationDialog("选择图片来源", isPresented: $showingSourceSelection) {
-            Button("拍照") {
-                showingImagePicker = true
-            }
-            Button("从相册选择") {
-                showingImagePicker = true
-            }
-            Button("取消", role: .cancel) { }
-        }
-        .sheet(isPresented: $showingImagePicker) {
-            ImagePicker(image: $receiptPhoto)
-        }
-        .onChange(of: receiptPhoto) { _, image in
-            if let image = image {
-                if entryMode == .photo {
-                    recognizeText(from: image)
                 }
             }
         }
@@ -300,19 +302,21 @@ struct ProductEntryView: View {
         pendingProducts = []
 
         OCRService.shared.recognizeText(from: image) { results, error in
-            isRecognizing = false
+            DispatchQueue.main.async {
+                self.isRecognizing = false
 
-            if let error = error {
-                print("OCR Error: \(error)")
-                addEmptyProduct()
-                return
-            }
+                if let error = error {
+                    print("OCR Error: \(error)")
+                    self.addEmptyProduct()
+                    return
+                }
 
-            let items = OCRService.shared.parseReceiptItems(from: results)
-            if items.isEmpty {
-                addEmptyProduct()
-            } else {
-                pendingProducts = items
+                let items = OCRService.shared.parseReceiptItems(from: results)
+                if items.isEmpty {
+                    self.addEmptyProduct()
+                } else {
+                    self.pendingProducts = items
+                }
             }
         }
     }
