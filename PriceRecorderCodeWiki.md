@@ -1,178 +1,178 @@
-# PriceRecorder Code Wiki
+# PriceRecorder 代码维基
 
-## 1. Project Overview
+## 1. 项目概述
 
-PriceRecorder is an iOS application designed for recording and comparing product prices from different merchants. It supports OCR receipt scanning, data import/export, iCloud backup, and price trend analysis.
+PriceRecorder 是一款 iOS 应用程序，用于记录和比较不同商家的商品价格。它支持 OCR 小票识别、数据导入导出、iCloud 备份以及价格趋势分析。
 
-### Key Features
-- ✅ Product recording (manual input and OCR receipt scanning)
-- ✅ Price comparison with historical trends
-- ✅ Merchant and brand management
-- ✅ Data import/export (CSV format)
-- ✅ iCloud backup (manual and automatic)
-- ✅ Statistics and data insights
-- ✅ Dark mode support
+### 主要功能
+- ✅ 商品录入（手动输入和 OCR 小票识别）
+- ✅ 价格比较与历史趋势
+- ✅ 商家和品牌管理
+- ✅ 数据导入导出（CSV 格式）
+- ✅ iCloud 备份（手动和自动）
+- ✅ 统计和数据洞察
+- ✅ 暗黑模式支持
 
-### Technology Stack
-- **Language**: Swift 5.0+
-- **UI Framework**: SwiftUI
-- **Data Persistence**: SwiftData
-- **Minimum iOS Version**: 17.0+
-- **OCR**: iOS Vision framework
-- **Charts**: SwiftCharts
+### 技术栈
+- **编程语言**: Swift 5.0+
+- **UI 框架**: SwiftUI
+- **数据持久化**: SwiftData
+- **最低 iOS 版本**: 17.0+
+- **OCR**: iOS Vision 框架
+- **图表**: SwiftCharts
 
-## 2. Architecture
+## 2. 架构
 
-The project follows a clean architecture with a clear separation of concerns:
+项目采用清晰的架构，关注点分离明确：
 
 ```
 PriceRecorder/
-├── Models/          # Data models using SwiftData
-├── Views/           # SwiftUI views
-│   ├── Home/        # Home screen
-│   ├── Search/      # Search functionality
-│   ├── Settings/    # Settings and management screens
-│   ├── ProductEntry/ # Product input screens
-│   ├── PriceComparison/ # Price comparison screens
-│   └── Components/  # Reusable UI components
-└── Services/        # Service layer
-    ├── OCRService.swift     # OCR text recognition
-    ├── CSVService.swift     # CSV import/export
-    └── CloudSyncService.swift # iCloud sync
+├── Models/          # 使用 SwiftData 的数据模型
+├── Views/           # SwiftUI 视图
+│   ├── Home/        # 首页
+│   ├── Search/      # 搜索功能
+│   ├── Settings/    # 设置和管理页面
+│   ├── ProductEntry/ # 商品录入页面
+│   ├── PriceComparison/ # 价格比较页面
+│   └── Components/  # 可重用 UI 组件
+└── Services/        # 服务层
+    ├── OCRService.swift     # OCR 文字识别
+    ├── CSVService.swift     # CSV 导入导出
+    └── CloudSyncService.swift # iCloud 同步
 ```
 
-### Architecture Principles
-- **Data-Driven**: Uses SwiftData for reactive data management
-- **Modular**: Clear separation between models, views, and services
-- **Reactive**: Leverages SwiftUI's declarative syntax and Combine for state management
-- **Service-Oriented**: Encapsulates complex functionality in dedicated service classes
+### 架构原则
+- **数据驱动**: 使用 SwiftData 进行响应式数据管理
+- **模块化**: 模型、视图和服务之间清晰分离
+- **响应式**: 利用 SwiftUI 的声明式语法和 Combine 进行状态管理
+- **服务导向**: 将复杂功能封装在专用服务类中
 
-## 3. Data Models
+## 3. 数据模型
 
 ### ProductRecord
-The core model representing a product purchase record.
+表示商品购买记录的核心模型。
 
-| Property | Type | Description |
-|----------|------|-------------|
-| id | UUID | Unique identifier |
-| name | String | Product name |
-| brand | String? | Product brand |
-| quantity | Double | Quantity purchased |
-| unit | String | Unit of measurement |
-| spec | String? | Product specification |
-| totalPrice | Double | Total price |
-| unitPrice | Double | Price per unit |
-| merchantID | UUID | Associated merchant ID |
-| purchaseDate | Date | Date of purchase |
-| receiptPhoto | Data? | Receipt image data |
-| notes | String? | Additional notes |
-| createTime | Date | Record creation time |
-| updateTime | Date | Last update time |
+| 属性 | 类型 | 描述 |
+|------|------|------|
+| id | UUID | 唯一标识符 |
+| name | String | 商品名称 |
+| brand | String? | 商品品牌 |
+| quantity | Double | 购买数量 |
+| unit | String | 计量单位 |
+| spec | String? | 商品规格 |
+| totalPrice | Double | 总价 |
+| unitPrice | Double | 单价 |
+| merchantID | UUID | 关联的商家 ID |
+| purchaseDate | Date | 购买日期 |
+| receiptPhoto | Data? | 小票图片数据 |
+| notes | String? | 附加备注 |
+| createTime | Date | 记录创建时间 |
+| updateTime | Date | 最后更新时间 |
 
 ### Merchant
-Represents a store or merchant where products are purchased.
+表示购买商品的商店或商家。
 
-| Property | Type | Description |
-|----------|------|-------------|
-| id | UUID | Unique identifier |
-| name | String | Merchant name |
-| categoryID | UUID? | Associated category ID |
-| address | String? | Merchant address |
-| phone | String? | Merchant phone number |
-| notes | String? | Additional notes |
-| createTime | Date | Record creation time |
-| updateTime | Date | Last update time |
+| 属性 | 类型 | 描述 |
+|------|------|------|
+| id | UUID | 唯一标识符 |
+| name | String | 商家名称 |
+| categoryID | UUID? | 关联的分类 ID |
+| address | String? | 商家地址 |
+| phone | String? | 商家电话号码 |
+| notes | String? | 附加备注 |
+| createTime | Date | 记录创建时间 |
+| updateTime | Date | 最后更新时间 |
 
 ### MerchantCategory
-Represents a category for classifying merchants.
+表示用于分类商家的类别。
 
-| Property | Type | Description |
-|----------|------|-------------|
-| id | UUID | Unique identifier |
-| name | String | Category name |
-| createTime | Date | Record creation time |
+| 属性 | 类型 | 描述 |
+|------|------|------|
+| id | UUID | 唯一标识符 |
+| name | String | 分类名称 |
+| createTime | Date | 记录创建时间 |
 
 ### Brand
-Represents a product brand.
+表示商品品牌。
 
-| Property | Type | Description |
-|----------|------|-------------|
-| id | UUID | Unique identifier |
-| name | String | Brand name |
-| createTime | Date | Record creation time |
+| 属性 | 类型 | 描述 |
+|------|------|------|
+| id | UUID | 唯一标识符 |
+| name | String | 品牌名称 |
+| createTime | Date | 记录创建时间 |
 
 ### Receipt
-Represents a purchase receipt.
+表示购买小票。
 
-| Property | Type | Description |
-|----------|------|-------------|
-| id | UUID | Unique identifier |
-| merchantID | UUID | Associated merchant ID |
-| purchaseDate | Date | Date of purchase |
-| photo | Data? | Receipt image data |
-| notes | String? | Additional notes |
-| createTime | Date | Record creation time |
+| 属性 | 类型 | 描述 |
+|------|------|------|
+| id | UUID | 唯一标识符 |
+| merchantID | UUID | 关联的商家 ID |
+| purchaseDate | Date | 购买日期 |
+| photo | Data? | 小票图片数据 |
+| notes | String? | 附加备注 |
+| createTime | Date | 记录创建时间 |
 
-## 4. Services
+## 4. 服务
 
 ### OCRService
-Handles text recognition from receipt images using the iOS Vision framework.
+使用 iOS Vision 框架处理小票图片的文字识别。
 
-#### Key Functions
-- `recognizeText(from:completion:)`: Recognizes text from an image
-- `parseReceiptItems(from:)`: Parses OCR results into product items
-- `parseLine(_:)`: Parses individual lines from OCR results
-- `parseQuantity(_:)`: Extracts quantity information from product names
+#### 核心函数
+- `recognizeText(from:completion:)`: 从图片中识别文字
+- `parseReceiptItems(from:)`: 将 OCR 结果解析为商品项
+- `parseLine(_:)`: 从 OCR 结果中解析单独的行
+- `parseQuantity(_:)`: 从商品名称中提取数量信息
 
 ### CSVService
-Handles importing and exporting data in CSV format.
+处理 CSV 格式的数据导入和导出。
 
-#### Key Functions
-- `exportCSV(data:)`: Exports product data to CSV format
-- `parseCSV(_:)`: Parses CSV data into product records
-- `escapeCSVField(_:)`: Escapes special characters in CSV fields
-- `parseCSVLine(_:)`: Parses individual lines from CSV data
+#### 核心函数
+- `exportCSV(data:)`: 将商品数据导出为 CSV 格式
+- `parseCSV(_:)`: 将 CSV 数据解析为商品记录
+- `escapeCSVField(_:)`: 转义 CSV 字段中的特殊字符
+- `parseCSVLine(_:)`: 从 CSV 数据中解析单独的行
 
 ### CloudSyncService
-Handles iCloud synchronization for data backup and restore.
+处理 iCloud 同步，用于数据备份和恢复。
 
-#### Key Functions
-- `backupToCloud(modelContext:completion:)`: Backs up data to iCloud
-- `restoreFromCloud(completion:)`: Restores data from iCloud
-- `triggerAutoBackupIfNeeded(modelContext:)`: Automatically backs up data if enabled
-- `saveAutoBackupSetting(_:)`: Saves auto-backup setting
+#### 核心函数
+- `backupToCloud(modelContext:completion:)`: 将数据备份到 iCloud
+- `restoreFromCloud(completion:)`: 从 iCloud 恢复数据
+- `triggerAutoBackupIfNeeded(modelContext:)`: 如启用则自动备份数据
+- `saveAutoBackupSetting(_:)`: 保存自动备份设置
 
-## 5. Views
+## 5. 视图
 
 ### HomeView
-Main screen showing recently recorded products and providing access to product entry.
+主屏幕，显示最近录入的商品并提供商品录入入口。
 
-#### Key Components
-- `ProductRow`: Displays individual product records in the list
-- Navigation to `ProductEntryView` and `ProductDetailView`
+#### 核心组件
+- `ProductRow`: 在列表中显示单独的商品记录
+- 导航到 `ProductEntryView` 和 `ProductDetailView`
 
 ### SearchView
-Provides search functionality for products and merchants with various sorting options.
+为商品和商家提供搜索功能，并支持多种排序方式。
 
 ### SettingsView
-Main settings screen with access to various management features.
+主设置屏幕，可访问各种管理功能。
 
 ### ProductEntryView
-Interface for manually entering product information or scanning receipts via OCR.
+用于手动输入商品信息或通过 OCR 扫描小票的界面。
 
 ### PriceComparisonView
-Displays price trends for selected products across different merchants.
+显示所选商品在不同商家的价格趋势。
 
-### Settings Subviews
-- `MerchantManagementView`: For managing merchant information
-- `BrandManagementView`: For managing brand information
-- `DataManagementView`: For importing/exporting data and managing backups
-- `StatisticsView`: For viewing data statistics and insights
+### 设置子视图
+- `MerchantManagementView`: 用于管理商家信息
+- `BrandManagementView`: 用于管理品牌信息
+- `DataManagementView`: 用于导入/导出数据和管理备份
+- `StatisticsView`: 用于查看数据统计和洞察
 
-## 6. Key Classes and Functions
+## 6. 核心类和函数
 
 ### PriceRecorderApp
-The main application entry point that sets up the SwiftData container and defines the tab structure.
+主应用程序入口点，设置 SwiftData 容器并定义标签结构。
 
 ```swift
 @main
@@ -180,28 +180,28 @@ struct PriceRecorderApp: App {
     let container: ModelContainer
     
     init() {
-        // Initialize SwiftData container with all models
+        // 使用所有模型初始化 SwiftData 容器
     }
     
     var body: some Scene {
-        // Define main tab view with Home, Search, and Settings tabs
+        // 定义带有首页、搜索和设置标签的主标签视图
     }
 }
 ```
 
 ### MainTabView
-Defines the main tab structure of the application.
+定义应用程序的主标签结构。
 
 ### OCRService.shared
-Singleton instance of the OCR service for text recognition from receipt images.
+OCR 服务的单例实例，用于从小票图片中识别文字。
 
 ### CSVService.shared
-Singleton instance of the CSV service for data import/export.
+CSV 服务的单例实例，用于数据导入/导出。
 
 ### CloudSyncService.shared
-Singleton instance of the cloud sync service for iCloud backup and restore.
+云同步服务的单例实例，用于 iCloud 备份和恢复。
 
-### ProductRecord Initializer
+### ProductRecord 初始化器
 ```swift
 init(
     id: UUID = UUID(),
@@ -218,79 +218,79 @@ init(
     createTime: Date = Date(),
     updateTime: Date = Date()
 ) {
-    // Initializes a product record with the given parameters
-    // Automatically calculates unit price
+    // 使用给定参数初始化商品记录
+    // 自动计算单价
 }
 ```
 
-## 7. Dependency Relationships
+## 7. 依赖关系
 
-### Data Flow
+### 数据流
 ```
 Views → Services → Models
 ```
 
-### Key Relationships
-- `ProductRecord` references `Merchant` via `merchantID`
-- `Merchant` references `MerchantCategory` via `categoryID`
-- `Receipt` references `Merchant` via `merchantID`
-- Views use SwiftData queries to access and display model data
-- Services interact with models to perform operations like OCR parsing, CSV import/export, and cloud sync
+### 关键关系
+- `ProductRecord` 通过 `merchantID` 引用 `Merchant`
+- `Merchant` 通过 `categoryID` 引用 `MerchantCategory`
+- `Receipt` 通过 `merchantID` 引用 `Merchant`
+- 视图使用 SwiftData 查询访问和显示模型数据
+- 服务与模型交互，执行 OCR 解析、CSV 导入/导出和云同步等操作
 
-### Service Dependencies
-- `OCRService` depends on iOS Vision framework
-- `CloudSyncService` depends on CloudKit framework
-- All services are singletons accessed via their `shared` property
+### 服务依赖
+- `OCRService` 依赖于 iOS Vision 框架
+- `CloudSyncService` 依赖于 CloudKit 框架
+- 所有服务都是单例，通过其 `shared` 属性访问
 
-## 8. Setup and Running Instructions
+## 8. 设置和运行说明
 
-### Requirements
+### 要求
 - Xcode 15.0+
 - Swift 5.0+
 - iOS 17.0+
-- Apple Developer account (for testing on real devices)
+- Apple 开发者账户（用于在真实设备上测试）
 
-### Configuration
-1. Open `PriceRecorder.xcodeproj` in Xcode
-2. In project settings, configure:
-   - Development Team
-   - Bundle Identifier (recommended to use a unique identifier)
-3. Ensure the minimum deployment target is set to iOS 17.0+
+### 配置
+1. 在 Xcode 中打开 `PriceRecorder.xcodeproj`
+2. 在项目设置中配置：
+   - 开发团队
+   - Bundle Identifier（建议使用唯一标识符）
+3. 确保最低部署目标设置为 iOS 17.0+
 
-### Permissions
-The app requires the following permissions (already configured in Info.plist):
-- Camera access (for OCR scanning)
-- Photo library access (for selecting receipt images)
+### 权限
+应用程序需要以下权限（已在 Info.plist 中配置）：
+- 相机访问权限（用于 OCR 扫描）
+- 相册访问权限（用于选择小票图片）
 
-### Running the App
-1. Select a simulator or connect an iPhone device (iOS 17+)
-2. Click the run button (⌘R) or use Product → Run
+### 运行应用程序
+1. 选择模拟器或连接 iPhone 设备（iOS 17+）
+2. 点击运行按钮（⌘R）或使用 Product → Run
 
-### Testing
-- Use ⌘U to run all tests
-- Tests are located in `PriceRecorderTests` and `PriceRecorderUITests` directories
+### 测试
+- 使用 ⌘U 运行所有测试
+- 测试位于 `PriceRecorderTests` 和 `PriceRecorderUITests` 目录中
 
-### Common Issues
-- **SwiftData not found**: Ensure deployment target is set to iOS 17.0+
-- **OCR not working**: Vision framework works best on real devices; performance may be limited on simulators
-- **iCloud sync issues**: Ensure device is signed in to iCloud and has internet connectivity
+### 常见问题
+- **找不到 SwiftData**: 确保部署目标设置为 iOS 17.0+
+- **OCR 不工作**: Vision 框架在真实设备上效果最佳；在模拟器上性能可能受限
+- **iCloud 同步问题**: 确保设备已登录 iCloud 并具有网络连接
 
-## 9. Additional Resources
+## 9. 额外资源
 
-### Project Documentation
-- [需求文档.md](file:///workspace/需求文档.md) - Detailed requirements
-- [设计文档.md](file:///workspace/设计文档.md) - Design documentation
-- [测试文档.md](file:///workspace/测试文档.md) - Test documentation
-- [编译和运行指南.md](file:///workspace/编译和运行指南.md) - Build and run guide
+### 项目文档
+- [需求文档.md](file:///workspace/需求文档.md) - 详细需求
+- [设计文档.md](file:///workspace/设计文档.md) - 设计文档
+- [测试文档.md](file:///workspace/测试文档.md) - 测试文档
+- [编译和运行指南.md](file:///workspace/编译和运行指南.md) - 构建和运行指南
 
-### Key Files
-- [PriceRecorderApp.swift](file:///workspace/PriceRecorder/PriceRecorderApp.swift) - Main application entry
-- [ProductRecord.swift](file:///workspace/PriceRecorder/Models/ProductRecord.swift) - Core data model
-- [OCRService.swift](file:///workspace/PriceRecorder/Services/OCRService.swift) - OCR functionality
-- [HomeView.swift](file:///workspace/PriceRecorder/Views/Home/HomeView.swift) - Main home screen
+### 关键文件
+- [PriceRecorderApp.swift](file:///workspace/PriceRecorder/PriceRecorderApp.swift) - 主应用程序入口
+- [ProductRecord.swift](file:///workspace/PriceRecorder/Models/ProductRecord.swift) - 核心数据模型
+- [OCRService.swift](file:///workspace/PriceRecorder/Services/OCRService.swift) - OCR 功能
+- [HomeView.swift](file:///workspace/PriceRecorder/Views/Home/HomeView.swift) - 主首页
 
-## 10. Conclusion
+## 10. 结论
 
-PriceRecorder is a comprehensive iOS application for tracking and comparing product prices. Its modular architecture, clear separation of concerns, and use of modern Swift technologies make it a well-structured project. The app provides a user-friendly interface for recording purchases, analyzing price trends, and managing merchant information, all while offering convenient features like OCR receipt scanning and cloud backup.
+PriceRecorder 是一款全面的 iOS 应用程序，用于跟踪和比较商品价格。其模块化架构、清晰的关注点分离以及现代 Swift 技术的使用使其成为一个结构良好的项目。该应用程序提供了一个用户友好的界面，用于记录购买、分析价格趋势和管理商家信息，同时提供 OCR 小票扫描和云备份等便捷功能。
 
-The codebase is well-organized, with a clear hierarchy of models, views, and services, making it easy to understand and extend. By following the provided setup instructions, developers can quickly get the app running and begin exploring its features or contributing to its development.
+代码库组织良好，具有清晰的模型、视图和服务层次结构，使其易于理解和扩展。通过遵循提供的设置说明，开发人员可以快速运行应用程序并开始探索其功能或为其开发做出贡献。
