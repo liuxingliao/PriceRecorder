@@ -25,6 +25,7 @@ struct ProductEntryView: View {
     @State private var showingMerchantSelector = false
     @State private var showingImagePicker = false
     @State private var showingSourceSelection = false
+    @State private var imagePickerSourceType: UIImagePickerController.SourceType = .photoLibrary
     @State private var showingAddMerchant = false
     @State private var isRecognizing = false
     @State private var editingProduct: PendingProduct?
@@ -127,15 +128,17 @@ struct ProductEntryView: View {
         }
         .confirmationDialog("选择图片来源", isPresented: $showingSourceSelection) {
             Button("拍照") {
+                imagePickerSourceType = .camera
                 showingImagePicker = true
             }
             Button("从相册选择") {
+                imagePickerSourceType = .photoLibrary
                 showingImagePicker = true
             }
             Button("取消", role: .cancel) { }
         }
         .sheet(isPresented: $showingImagePicker) {
-            ImagePicker(image: $receiptPhoto)
+            ImagePicker(image: $receiptPhoto, sourceType: imagePickerSourceType)
         }
         .onChange(of: receiptPhoto) { _, image in
             if let image = image {
