@@ -14,7 +14,6 @@ struct ProductDetailView: View {
     @Bindable var product: ProductRecord
 
     @Query private var merchants: [Merchant]
-    @Query private var brands: [Brand]
     @Query(sort: \ProductRecord.name) private var existingProducts: [ProductRecord]
 
     @State private var isEditing = false
@@ -30,12 +29,10 @@ struct ProductDetailView: View {
     @State private var showingMerchantSelector = false
     @State private var showingImagePicker = false
     @State private var selectedImage: UIImage?
-    @State private var showingBrandSelector = false
 
     init(product: ProductRecord) {
         self.product = product
         _merchants = Query()
-        _brands = Query()
     }
 
     var merchant: Merchant? {
@@ -54,9 +51,8 @@ struct ProductDetailView: View {
 
     // 获取已有的品牌建议
     var existingBrandsList: [String] {
-        let brandsFromModel = brands.map { $0.name }
         let brandsFromProducts = existingProducts.compactMap { $0.brand }
-        return Array(Set(brandsFromModel + brandsFromProducts)).sorted()
+        return Array(Set(brandsFromProducts)).sorted()
     }
 
     // 获取已有的规格建议
@@ -213,19 +209,11 @@ struct ProductDetailView: View {
                     Text("品牌")
                         .font(.caption)
                         .foregroundColor(.secondary)
-                    HStack {
-                        TextField("品牌", text: Binding(
-                            get: { editBrand ?? "" },
-                            set: { editBrand = $0.isEmpty ? nil : $0 }
-                        ))
-                        .textFieldStyle(.roundedBorder)
-
-                        if !brands.isEmpty {
-                            Button("选择") {
-                                showingBrandSelector = true
-                            }
-                        }
-                    }
+                    TextField("品牌", text: Binding(
+                        get: { editBrand ?? "" },
+                        set: { editBrand = $0.isEmpty ? nil : $0 }
+                    ))
+                    .textFieldStyle(.roundedBorder)
 
                     // 品牌建议
                     let brandText = editBrand ?? ""

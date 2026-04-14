@@ -12,12 +12,10 @@ struct StatisticsView: View {
     @Query private var products: [ProductRecord]
     @Query private var merchants: [Merchant]
     @Query private var categories: [MerchantCategory]
-    @Query private var brands: [Brand]
 
     var totalProducts: Int { products.count }
     var totalMerchants: Int { merchants.count }
     var totalCategories: Int { categories.count }
-    var totalBrands: Int { brands.count }
 
     var totalSpent: Double {
         products.reduce(0) { $0 + $1.totalPrice }
@@ -49,7 +47,6 @@ struct StatisticsView: View {
                 StatRow(icon: "cart.fill", label: "商品总数", value: "\(totalProducts)")
                 StatRow(icon: "storefront.fill", label: "商家数量", value: "\(totalMerchants)")
                 StatRow(icon: "folder.fill", label: "分类数量", value: "\(totalCategories)")
-                StatRow(icon: "tag.fill", label: "品牌数量", value: "\(totalBrands)")
             }
 
             Section("消费统计") {
@@ -122,5 +119,5 @@ struct StatRow: View {
     NavigationStack {
         StatisticsView()
     }
-    .modelContainer(for: [ProductRecord.self, Merchant.self, Brand.self], inMemory: true)
+    .modelContainer(for: [ProductRecord.self, Merchant.self], inMemory: true)
 }

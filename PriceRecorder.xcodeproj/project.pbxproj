@@ -11,7 +11,6 @@
 		AA03 /* ProductRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA04 /* ProductRecord.swift */; };
 		AA05 /* Merchant.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA06 /* Merchant.swift */; };
 		AA07 /* MerchantCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA08 /* MerchantCategory.swift */; };
-		AA09 /* Brand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0A /* Brand.swift */; };
 		AA0B /* Receipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0C /* Receipt.swift */; };
 		AA0D /* OCRService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0E /* OCRService.swift */; };
 		AA0F /* CSVService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA10 /* CSVService.swift */; };
@@ -22,7 +21,6 @@
 		AA19 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A /* SearchView.swift */; };
 		AA1B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1C /* SettingsView.swift */; };
 		AA1D /* MerchantManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1E /* MerchantManagementView.swift */; };
-		AA1F /* BrandManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA20 /* BrandManagementView.swift */; };
 		AA21 /* DataManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA22 /* DataManagementView.swift */; };
 		AA23 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA24 /* StatisticsView.swift */; };
 		AA25 /* ProductEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA26 /* ProductEntryView.swift */; };
@@ -34,7 +32,6 @@
 		AA04 /* ProductRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRecord.swift; sourceTree = "<group>"; };
 		AA06 /* Merchant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Merchant.swift; sourceTree = "<group>"; };
 		AA08 /* MerchantCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantCategory.swift; sourceTree = "<group>"; };
-		AA0A /* Brand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brand.swift; sourceTree = "<group>"; };
 		AA0C /* Receipt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receipt.swift; sourceTree = "<group>"; };
 		AA0E /* OCRService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRService.swift; sourceTree = "<group>"; };
 		AA10 /* CSVService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVService.swift; sourceTree = "<group>"; };
@@ -45,7 +42,6 @@
 		AA1A /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		AA1C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AA1E /* MerchantManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantManagementView.swift; sourceTree = "<group>"; };
-		AA20 /* BrandManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandManagementView.swift; sourceTree = "<group>"; };
 		AA22 /* DataManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagementView.swift; sourceTree = "<group>"; };
 		AA24 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		AA26 /* ProductEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductEntryView.swift; sourceTree = "<group>"; };
@@ -98,7 +94,6 @@
 				AA04 /* ProductRecord.swift */,
 				AA06 /* Merchant.swift */,
 				AA08 /* MerchantCategory.swift */,
-				AA0A /* Brand.swift */,
 				AA0C /* Receipt.swift */,
 			);
 			path = Models;
@@ -164,7 +159,6 @@
 			children = (
 				AA1C /* SettingsView.swift */,
 				AA1E /* MerchantManagementView.swift */,
-				AA20 /* BrandManagementView.swift */,
 				AA22 /* DataManagementView.swift */,
 				AA24 /* StatisticsView.swift */,
 			);
@@ -259,7 +253,6 @@
 				AA03 /* ProductRecord.swift in Sources */,
 				AA05 /* Merchant.swift in Sources */,
 				AA07 /* MerchantCategory.swift in Sources */,
-				AA09 /* Brand.swift in Sources */,
 				AA0B /* Receipt.swift in Sources */,
 				AA0D /* OCRService.swift in Sources */,
 				AA0F /* CSVService.swift in Sources */,
@@ -270,7 +263,6 @@
 				AA19 /* SearchView.swift in Sources */,
 				AA1B /* SettingsView.swift in Sources */,
 				AA1D /* MerchantManagementView.swift in Sources */,
-				AA1F /* BrandManagementView.swift in Sources */,
 				AA21 /* DataManagementView.swift in Sources */,
 				AA23 /* StatisticsView.swift in Sources */,
 				AA25 /* ProductEntryView.swift in Sources */,

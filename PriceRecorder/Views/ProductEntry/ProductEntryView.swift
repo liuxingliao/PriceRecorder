@@ -15,7 +15,6 @@ struct ProductEntryView: View {
     @Environment(\.dismiss) private var dismiss
     @Query(sort: \Merchant.name) private var merchants: [Merchant]
     @Query(sort: \MerchantCategory.name) private var categories: [MerchantCategory]
-    @Query(sort: \Brand.name) private var brands: [Brand]
 
     @State private var entryMode: EntryMode? = nil
     @State private var pendingProducts: [PendingProduct] = []
@@ -165,7 +164,7 @@ struct ProductEntryView: View {
             }
         }
         .sheet(item: $editingProduct) { product in
-            ProductEditSheet(product: product, brands: brands) { updated in
+            ProductEditSheet(product: product) { updated in
                 if let index = pendingProducts.firstIndex(where: { $0.id == product.id }) {
                     pendingProducts[index] = updated
                 }
@@ -385,7 +384,6 @@ struct ProductEditSheet: View {
     @Query(sort: \ProductRecord.name) private var existingProducts: [ProductRecord]
 
     let product: PendingProduct
-    let brands: [Brand]
     let onSave: (PendingProduct) -> Void
 
     @State private var name: String
@@ -396,9 +394,8 @@ struct ProductEditSheet: View {
     @State private var totalPrice: Double
     @State private var notes: String?
 
-    init(product: PendingProduct, brands: [Brand], onSave: @escaping (PendingProduct) -> Void) {
+    init(product: PendingProduct, onSave: @escaping (PendingProduct) -> Void) {
         self.product = product
-        self.brands = brands
         self.onSave = onSave
         _name = State(initialValue: product.name)
         _brand = State(initialValue: product.brand)
@@ -420,9 +417,8 @@ struct ProductEditSheet: View {
 
     // 获取已有的品牌建议
     var existingBrands: [String] {
-        let brandsFromModel = brands.map { $0.name }
         let brandsFromProducts = existingProducts.compactMap { $0.brand }
-        return Array(Set(brandsFromModel + brandsFromProducts)).sorted()
+        return Array(Set(brandsFromProducts)).sorted()
     }
 
     // 获取已有的规格建议

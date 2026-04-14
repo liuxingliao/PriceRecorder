@@ -13,7 +13,6 @@ struct SettingsView: View {
     @StateObject private var cloudSyncService = CloudSyncService.shared
 
     @State private var showingMerchantManagement = false
-    @State private var showingBrandManagement = false
     @State private var showingDataManagement = false
     @State private var showingClearDataAlert = false
     @State private var showingStatistics = false
@@ -30,20 +29,6 @@ struct SettingsView: View {
                                 .foregroundColor(.blue)
                                 .frame(width: 30)
                             Text("商家管理")
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.secondary)
-                        }
-                    }
-
-                    Button(action: {
-                        showingBrandManagement = true
-                    }) {
-                        HStack {
-                            Image(systemName: "tag.fill")
-                                .foregroundColor(.green)
-                                .frame(width: 30)
-                            Text("品牌管理")
                             Spacer()
                             Image(systemName: "chevron.right")
                                 .foregroundColor(.secondary)
@@ -145,9 +130,6 @@ struct SettingsView: View {
             .navigationDestination(isPresented: $showingMerchantManagement) {
                 MerchantManagementView()
             }
-            .navigationDestination(isPresented: $showingBrandManagement) {
-                BrandManagementView()
-            }
             .navigationDestination(isPresented: $showingDataManagement) {
                 DataManagementView()
             }
@@ -161,7 +143,6 @@ struct SettingsView: View {
         try? modelContext.delete(model: ProductRecord.self)
         try? modelContext.delete(model: Merchant.self)
         try? modelContext.delete(model: MerchantCategory.self)
-        try? modelContext.delete(model: Brand.self)
         try? modelContext.delete(model: Receipt.self)
     }
 }

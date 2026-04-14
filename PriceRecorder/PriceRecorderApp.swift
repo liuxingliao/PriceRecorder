@@ -18,7 +18,6 @@ struct PriceRecorderApp: App {
                 ProductRecord.self,
                 Merchant.self,
                 MerchantCategory.self,
-                Brand.self,
                 Receipt.self
             ])
             container = try ModelContainer(for: schema, configurations: [
