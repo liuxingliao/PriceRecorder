@@ -176,21 +176,34 @@ struct DataManagementView: View {
             let csvData = try CSVService.shared.parseCSV(content)
 
             var successCount = 0
+            var merchantCache: [String: Merchant] = [:]
+            var categoryCache: [String: MerchantCategory] = [:]
+
+            // 先填充缓存
+            for merchant in merchants {
+                merchantCache[merchant.name] = merchant
+            }
+            for category in categories {
+                categoryCache[category.name] = category
+            }
 
             for data in csvData {
                 let category: MerchantCategory?
                 if let categoryName = data.merchantCategory {
-                    category = categories.first { $0.name == categoryName } ?? {
+                    if let existing = categoryCache[categoryName] {
+                        category = existing
+                    } else {
                         let newCategory = MerchantCategory(name: categoryName)
                         modelContext.insert(newCategory)
-                        return newCategory
-                    }()
+                        categoryCache[categoryName] = newCategory
+                        category = newCategory
+                    }
                 } else {
                     category = nil
                 }
 
                 let merchant: Merchant
-                if let existing = merchants.first(where: { $0.name == data.merchantName }) {
+                if let existing = merchantCache[data.merchantName] {
                     merchant = existing
                 } else {
                     merchant = Merchant(
@@ -198,6 +211,7 @@ struct DataManagementView: View {
                         categoryID: category?.id
                     )
                     modelContext.insert(merchant)
+                    merchantCache[data.merchantName] = merchant
                 }
 
                 let product = ProductRecord(

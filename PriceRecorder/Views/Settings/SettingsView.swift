@@ -12,14 +12,43 @@ struct SettingsView: View {
     @Environment(\.modelContext) private var modelContext
     @StateObject private var cloudSyncService = CloudSyncService.shared
 
+    @Query private var apiConfigs: [APIConfig]
+
     @State private var showingMerchantManagement = false
     @State private var showingDataManagement = false
     @State private var showingClearDataAlert = false
     @State private var showingStatistics = false
+    @State private var showingAPIConfig = false
+
+    var currentConfig: APIConfig {
+        if let config = apiConfigs.first {
+            return config
+        }
+        let newConfig = APIConfig()
+        modelContext.insert(newConfig)
+        try? modelContext.save()
+        return newConfig
+    }
 
     var body: some View {
         NavigationStack {
             List {
+                Section("豆包配置") {
+                    Button(action: {
+                        showingAPIConfig = true
+                    }) {
+                        HStack {
+                            Image(systemName: "link")
+                                .foregroundColor(.blue)
+                                .frame(width: 30)
+                            Text("豆包链接配置")
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                }
+
                 Section("数据管理") {
                     Button(action: {
                         showingMerchantManagement = true
@@ -135,6 +164,9 @@ struct SettingsView: View {
             }
             .navigationDestination(isPresented: $showingStatistics) {
                 StatisticsView()
+            }
+            .navigationDestination(isPresented: $showingAPIConfig) {
+                APIConfigView(config: currentConfig)
             }
         }
     }

@@ -13,19 +13,38 @@ struct PriceRecorderApp: App {
     let container: ModelContainer
 
     init() {
+        let schema = Schema([
+            ProductRecord.self,
+            Merchant.self,
+            MerchantCategory.self,
+            Receipt.self,
+            APIConfig.self
+        ])
+
+        let storeURL = Self.storeURL
+
         do {
-            let schema = Schema([
-                ProductRecord.self,
-                Merchant.self,
-                MerchantCategory.self,
-                Receipt.self
-            ])
             container = try ModelContainer(for: schema, configurations: [
-                ModelConfiguration(isStoredInMemoryOnly: false)
+                ModelConfiguration(url: storeURL)
             ])
         } catch {
-            fatalError("Failed to create ModelContainer: \(error)")
+            print("Failed to create ModelContainer: \(error)")
+            try? FileManager.default.removeItem(at: storeURL)
+            try? FileManager.default.removeItem(at: storeURL.appendingPathExtension("sqlite-shm"))
+            try? FileManager.default.removeItem(at: storeURL.appendingPathExtension("sqlite-wal"))
+            do {
+                container = try ModelContainer(for: schema, configurations: [
+                    ModelConfiguration(url: storeURL)
+                ])
+            } catch {
+                fatalError("Failed to create ModelContainer: \(error)")
+            }
         }
+    }
+
+    private static var storeURL: URL {
+        let url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+        return url.appendingPathComponent("pricedata_v2.store")
     }
 
     var body: some Scene {
@@ -59,5 +78,5 @@ struct MainTabView: View {
 
 #Preview {
     MainTabView()
-        .modelContainer(for: [ProductRecord.self, Merchant.self], inMemory: true)
+        .modelContainer(for: [ProductRecord.self, Merchant.self, APIConfig.self], inMemory: true)
 }

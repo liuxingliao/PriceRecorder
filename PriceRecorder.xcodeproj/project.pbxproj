@@ -25,6 +25,9 @@
 		AA23 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA24 /* StatisticsView.swift */; };
 		AA25 /* ProductEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA26 /* ProductEntryView.swift */; };
 		AA27 /* PriceComparisonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA28 /* PriceComparisonView.swift */; };
+		AA50 /* APIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51 /* APIConfig.swift */; };
+		AA54 /* APIConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA55 /* APIConfigView.swift */; };
+		AA60 /* DoubaoEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA61 /* DoubaoEntryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +50,9 @@
 		AA26 /* ProductEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductEntryView.swift; sourceTree = "<group>"; };
 		AA28 /* PriceComparisonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceComparisonView.swift; sourceTree = "<group>"; };
 		AA2B /* PriceRecorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PriceRecorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA51 /* APIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfig.swift; sourceTree = "<group>"; };
+		AA55 /* APIConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfigView.swift; sourceTree = "<group>"; };
+		AA61 /* DoubaoEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubaoEntryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +101,7 @@
 				AA06 /* Merchant.swift */,
 				AA08 /* MerchantCategory.swift */,
 				AA0C /* Receipt.swift */,
+				AA51 /* APIConfig.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -161,6 +168,7 @@
 				AA1E /* MerchantManagementView.swift */,
 				AA22 /* DataManagementView.swift */,
 				AA24 /* StatisticsView.swift */,
+				AA55 /* APIConfigView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -169,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				AA26 /* ProductEntryView.swift */,
+				AA61 /* DoubaoEntryView.swift */,
 			);
 			path = ProductEntry;
 			sourceTree = "<group>";
@@ -267,6 +276,9 @@
 				AA23 /* StatisticsView.swift in Sources */,
 				AA25 /* ProductEntryView.swift in Sources */,
 				AA27 /* PriceComparisonView.swift in Sources */,
+				AA50 /* APIConfig.swift in Sources */,
+				AA54 /* APIConfigView.swift in Sources */,
+				AA60 /* DoubaoEntryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

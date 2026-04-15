@@ -7,30 +7,23 @@
 
 import SwiftUI
 import SwiftData
-import Vision
 
 struct ProductEntryView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
     @Query(sort: \Merchant.name) private var merchants: [Merchant]
-    @Query(sort: \MerchantCategory.name) private var categories: [MerchantCategory]
 
     @State private var entryMode: EntryMode? = nil
     @State private var pendingProducts: [PendingProduct] = []
     @State private var selectedMerchantID: UUID?
     @State private var purchaseDate = Date()
-    @State private var receiptPhoto: UIImage?
     @State private var showingMerchantSelector = false
-    @State private var showingImagePicker = false
-    @State private var imagePickerSourceType: UIImagePickerController.SourceType = .photoLibrary
-    @State private var showingSourceSelection = false
     @State private var showingAddMerchant = false
-    @State private var isRecognizing = false
     @State private var editingProduct: PendingProduct?
+    @State private var showingDoubaoEntry = false
 
     enum EntryMode: String {
         case manual = "manual"
-        case photo = "photo"
     }
 
     var selectedMerchant: Merchant? {
@@ -52,27 +45,8 @@ struct ProductEntryView: View {
                 productEntryForm
             }
         }
-        .confirmationDialog("选择图片来源", isPresented: $showingSourceSelection) {
-            Button("拍照") {
-                imagePickerSourceType = .camera
-                showingImagePicker = true
-            }
-            Button("从相册选择") {
-                imagePickerSourceType = .photoLibrary
-                showingImagePicker = true
-            }
-            Button("取消", role: .cancel) { }
-        }
-        .sheet(isPresented: $showingImagePicker) {
-            ImagePicker(image: $receiptPhoto, sourceType: imagePickerSourceType) {
-                showingImagePicker = false
-            }
-        }
-        .onChange(of: receiptPhoto) { _, image in
-            if let image = image {
-                entryMode = .photo
-                recognizeText(from: image)
-            }
+        .sheet(isPresented: $showingDoubaoEntry) {
+            DoubaoEntryView()
         }
     }
 
@@ -108,11 +82,10 @@ struct ProductEntryView: View {
                 }
 
                 Button(action: {
-                    pendingProducts = []
-                    showingSourceSelection = true
+                    showingDoubaoEntry = true
                 }) {
                     HStack(spacing: 16) {
-                        Image(systemName: "camera.fill")
+                        Image(systemName: "wand.and.stars")
                             .font(.system(size: 30))
                             .foregroundColor(.white)
                             .frame(width: 60, height: 60)
@@ -120,9 +93,9 @@ struct ProductEntryView: View {
                             .cornerRadius(12)
 
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("拍照识别")
+                            Text("豆包录入")
                                 .font(.headline)
-                            Text("拍摄小票自动识别")
+                            Text("通过豆包智能录入")
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
                         }
@@ -157,7 +130,7 @@ struct ProductEntryView: View {
 
             bottomBar
         }
-        .navigationTitle(entryMode == .manual ? "手动录入" : "拍照识别")
+        .navigationTitle("手动录入")
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button("返回") {
@@ -263,23 +236,15 @@ struct ProductEntryView: View {
                 }
 
                 Button(action: save) {
-                    if isRecognizing {
-                        ProgressView()
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.gray)
-                            .cornerRadius(10)
-                    } else {
-                        Text("保存 \(pendingProducts.count) 件商品")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(canSave ? Color.blue : Color.gray)
-                            .cornerRadius(10)
-                    }
+                    Text("保存 \(pendingProducts.count) 件商品")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(canSave ? Color.blue : Color.gray)
+                        .cornerRadius(10)
                 }
-                .disabled(!canSave || isRecognizing)
+                .disabled(!canSave)
             }
             .padding()
             .background(Color(.systemBackground))
@@ -297,41 +262,8 @@ struct ProductEntryView: View {
         editingProduct = product
     }
 
-    private func recognizeText(from image: UIImage) {
-        isRecognizing = true
-        pendingProducts = []
-
-        OCRService.shared.recognizeText(from: image) { results, error in
-            DispatchQueue.main.async {
-                self.isRecognizing = false
-
-                if let error = error {
-                    print("OCR Error: \(error)")
-                    self.addEmptyProduct()
-                    return
-                }
-
-                let items = OCRService.shared.parseReceiptItems(from: results)
-                if items.isEmpty {
-                    self.addEmptyProduct()
-                } else {
-                    self.pendingProducts = items
-                }
-            }
-        }
-    }
-
     private func save() {
         guard let merchantID = selectedMerchantID else { return }
-
-        let photoData = receiptPhoto?.jpegData(compressionQuality: 0.8)
-
-        let receipt = Receipt(
-            merchantID: merchantID,
-            purchaseDate: purchaseDate,
-            photo: photoData
-        )
-        modelContext.insert(receipt)
 
         for pending in pendingProducts {
             let product = ProductRecord(
@@ -343,7 +275,7 @@ struct ProductEntryView: View {
                 totalPrice: pending.totalPrice,
                 merchantID: merchantID,
                 purchaseDate: purchaseDate,
-                receiptPhoto: photoData,
+                receiptPhoto: nil,
                 notes: pending.notes
             )
             modelContext.insert(product)
