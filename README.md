@@ -2,7 +2,7 @@
 
 ## 项目简介
 
-这是一个用于记录和比较不同商家商品价格的iOS应用，支持OCR小票识别、数据导入导出、iCloud备份等功能。
+这是一个用于记录和比较不同商家商品价格的iOS应用，支持豆包智能录入、数据导入导出、iCloud备份等功能。
 
 ## 技术栈
 
@@ -10,7 +10,6 @@
 - **UI框架**: SwiftUI
 - **数据持久化**: SwiftData
 - **最低系统版本**: iOS 17.0+
-- **OCR**: iOS Vision框架
 - **图表**: SwiftCharts
 
 ## 项目结构
@@ -28,8 +27,8 @@ PriceRecorder/
     │   ├── ProductRecord.swift
     │   ├── Merchant.swift
     │   ├── MerchantCategory.swift
-    │   ├── Brand.swift
-    │   └── Receipt.swift
+    │   ├── Receipt.swift
+    │   └── APIConfig.swift
     ├── Views/                         # 页面视图
     │   ├── Home/
     │   │   ├── HomeView.swift        # 首页
@@ -39,11 +38,12 @@ PriceRecorder/
     │   ├── Settings/
     │   │   ├── SettingsView.swift
     │   │   ├── MerchantManagementView.swift
-    │   │   ├── BrandManagementView.swift
     │   │   ├── DataManagementView.swift
-    │   │   └── StatisticsView.swift
+    │   │   ├── StatisticsView.swift
+    │   │   └── APIConfigView.swift
     │   ├── ProductEntry/
-    │   │   └── ProductEntryView.swift
+    │   │   ├── ProductEntryView.swift
+    │   │   └── DoubaoEntryView.swift
     │   ├── PriceComparison/
     │   │   └── PriceComparisonView.swift
     │   └── Components/
@@ -52,24 +52,18 @@ PriceRecorder/
         ├── OCRService.swift
         ├── CSVService.swift
         └── CloudSyncService.swift
-
-PriceRecorderTests/                    # 单元测试
-└── PriceRecorderTests.swift
-
-PriceRecorderUITests/                   # UI测试
-└── PriceRecorderUITests.swift
 ```
 
 ## 功能特性
 
 ### 核心功能
 - ✅ 首页 - 显示最近10条录入商品
-- ✅ 商品录入 - 支持手动输入和拍照OCR识别
+- ✅ 商品录入 - 支持手动输入和豆包智能录入
+- ✅ 豆包录入 - 通过豆包获取JSON数据，一键解析录入
 - ✅ 搜索页面 - 商品/商家模式切换，多种排序方式
 - ✅ 比价功能 - 选择商品和商家，显示历史价格趋势图
 - ✅ 商家管理 - 商家增删改查，分类管理
-- ✅ 品牌管理 - 品牌列表管理
-- ✅ 数据导入导出 - CSV格式，全部字段
+- ✅ 数据导入导出 - CSV格式，全部字段，支持商家去重
 - ✅ iCloud备份 - 手动+自动备份
 - ✅ 数据统计 - 商品数、商家数、总支出等
 - ✅ 暗黑模式 - 完整支持
@@ -85,54 +79,18 @@ PriceRecorderUITests/                   # UI测试
 3. 选择模拟器或连接iPhone设备（iOS 17+）
 4. 点击运行按钮（⌘R）
 
-### 配置权限
+### 豆包录入使用说明
 
-项目需要以下权限，已在Info.plist中配置：
-- 相机访问权限（拍照）
-- 相册访问权限（选择图片）
+1. 在商品录入页面选择"豆包录入"
+2. 点击"打开豆包"按钮，在豆包中复制商品JSON数据
+3. 将JSON数据粘贴到编辑框
+4. 点击"解析商品"按钮
+5. 确认商品列表，选择商家和购买时间
+6. 点击保存完成录入
 
-## 添加测试Target（可选）
+### 配置豆包链接
 
-如果需要添加单元测试和UI测试，请在Xcode中手动添加：
-
-### 添加单元测试Target
-
-1. 打开项目，选择项目导航器
-2. 点击项目名称，选择 "Targets"
-3. 点击 "+" 按钮添加新Target
-4. 选择 "iOS Unit Testing Bundle"
-5. 产品名称：PriceRecorderTests
-6. 点击 "Finish"
-7. 将 `PriceRecorderTests/PriceRecorderTests.swift` 文件添加到这个Target中
-
-### 添加UI测试Target
-
-1. 同样点击 "+" 按钮添加新Target
-2. 选择 "iOS UI Testing Bundle"
-3. 产品名称：PriceRecorderUITests
-4. 点击 "Finish"
-5. 将 `PriceRecorderUITests/PriceRecorderUITests.swift` 文件添加到这个Target中
-
-## 运行测试
-
-### 在Xcode中运行
-- 使用快捷键 `⌘U` 运行所有测试
-- 或选择 Product → Test
-
-### 运行特定测试
-- 在测试导航器中点击特定测试旁边的播放按钮
-
-### 命令行运行
-```bash
-# 运行所有测试
-xcodebuild test -scheme PriceRecorder -destination 'platform=iOS Simulator,name=iPhone 15'
-
-# 只运行单元测试
-xcodebuild test -scheme PriceRecorder -only-testing:PriceRecorderTests
-
-# 只运行UI测试
-xcodebuild test -scheme PriceRecorder -only-testing:PriceRecorderUITests
-```
+在"设置" → "豆包配置"中可以配置自定义的豆包链接。
 
 ## 编译测试
 
@@ -164,11 +122,25 @@ xcodebuild clean build -scheme PriceRecorder
 ### Q: 编译报错说找不到SwiftData？
 A: 确保部署目标设置为iOS 17.0或更高版本。
 
-### Q: OCR识别不工作？
-A: Vision框架需要在真机上才能获得最佳效果，模拟器上也可以工作但性能较差。
+### Q: 豆包录入的JSON格式是什么？
+A: JSON格式示例：
+```json
+[
+  {
+    "name": "商品名称",
+    "quantity": 1.0,
+    "unit": "个",
+    "totalPrice": 10.0,
+    "spec": "规格（可选）"
+  }
+]
+```
 
 ### Q: 如何修改Bundle Identifier？
 A: 在项目设置 → Targets → PriceRecorder → General → Bundle Identifier中修改。
+
+### Q: CSV导入时商家重复怎么办？
+A: 已修复此问题，导入时会自动去重，同一商家只会创建一条记录。
 
 ## 开发者信息
 
