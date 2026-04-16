@@ -16,6 +16,9 @@ struct MerchantManagementView: View {
     @State private var showingAddMerchant = false
     @State private var showingCategoryManagement = false
     @State private var editingMerchant: Merchant?
+    @State private var merchantToDelete: Merchant?
+    @State private var showingDeleteAlert = false
+    @Query private var products: [ProductRecord]
 
     var body: some View {
         List {
@@ -52,6 +55,14 @@ struct MerchantManagementView: View {
                             .onTapGesture {
                                 editingMerchant = merchant
                             }
+                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                Button(role: .destructive) {
+                                    merchantToDelete = merchant
+                                    showingDeleteAlert = true
+                                } label: {
+                                    Label("删除", systemImage: "trash")
+                                }
+                            }
                     }
                 }
             }
@@ -75,6 +86,33 @@ struct MerchantManagementView: View {
         .sheet(isPresented: $showingCategoryManagement) {
             CategoryManagementView()
         }
+        .alert("确认删除商家?", isPresented: $showingDeleteAlert) {
+            Button("取消", role: .cancel) { }
+            Button("删除", role: .destructive) {
+                if let merchant = merchantToDelete {
+                    deleteMerchant(merchant)
+                }
+            }
+        } message: {
+            if let merchant = merchantToDelete {
+                let linkedProductCount = products.filter { $0.merchantID == merchant.id }.count
+                if linkedProductCount > 0 {
+                    Text("该商家已有 \(linkedProductCount) 个商品记录，无法删除！")
+                } else {
+                    Text("确定要删除商家「\(merchant.name)」吗？此操作不可恢复。")
+                }
+            } else {
+                Text("确定要删除此商家吗？此操作不可恢复。")
+            }
+        }
+    }
+
+    private func deleteMerchant(_ merchant: Merchant) {
+        let linkedProductCount = products.filter { $0.merchantID == merchant.id }.count
+        guard linkedProductCount == 0 else {
+            return
+        }
+        modelContext.delete(merchant)
     }
 }
 
@@ -120,6 +158,7 @@ struct MerchantEditView: View {
     @State private var address = ""
     @State private var phone = ""
     @State private var notes = ""
+    @State private var showingLocationPicker = false
 
     var isEditing: Bool { merchant != nil }
 
@@ -138,7 +177,15 @@ struct MerchantEditView: View {
                 }
 
                 Section("详细信息") {
-                    TextField("地址", text: $address)
+                    HStack {
+                        TextField("地址", text: $address)
+                        Button(action: {
+                            showingLocationPicker = true
+                        }) {
+                            Image(systemName: "location.circle.fill")
+                                .foregroundColor(.blue)
+                        }
+                    }
                     TextField("电话", text: $phone)
                     TextField("备注", text: $notes, axis: .vertical)
                 }
@@ -165,6 +212,9 @@ struct MerchantEditView: View {
                     phone = merchant.phone ?? ""
                     notes = merchant.notes ?? ""
                 }
+            }
+            .sheet(isPresented: $showingLocationPicker) {
+                LocationPicker(address: $address)
             }
         }
     }

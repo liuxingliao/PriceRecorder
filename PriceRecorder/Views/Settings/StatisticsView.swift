@@ -17,6 +17,29 @@ struct StatisticsView: View {
     var totalMerchants: Int { merchants.count }
     var totalCategories: Int { categories.count }
 
+    // 图片统计
+    var photosCount: Int {
+        products.filter { $0.receiptPhoto != nil }.count
+    }
+
+    // 数据大小统计
+    var totalDataSize: Int {
+        var total = 0
+        for product in products {
+            if let photoData = product.receiptPhoto {
+                total += photoData.count
+            }
+        }
+        return total
+    }
+
+    func formatBytes(_ bytes: Int) -> String {
+        let formatter = ByteCountFormatter()
+        formatter.allowedUnits = [.useKB, .useMB, .useGB]
+        formatter.countStyle = .file
+        return formatter.string(fromByteCount: Int64(bytes))
+    }
+
     var totalSpent: Double {
         products.reduce(0) { $0 + $1.totalPrice }
     }
@@ -47,6 +70,11 @@ struct StatisticsView: View {
                 StatRow(icon: "cart.fill", label: "商品总数", value: "\(totalProducts)")
                 StatRow(icon: "storefront.fill", label: "商家数量", value: "\(totalMerchants)")
                 StatRow(icon: "folder.fill", label: "分类数量", value: "\(totalCategories)")
+            }
+
+            Section("数据统计") {
+                StatRow(icon: "photo.fill", label: "照片数量", value: "\(photosCount)")
+                StatRow(icon: "externaldrive.fill", label: "数据占用", value: formatBytes(totalDataSize))
             }
 
             Section("消费统计") {

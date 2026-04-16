@@ -17,6 +17,8 @@ struct PriceComparisonView: View {
     @State private var step: ComparisonStep = .selectProduct
     @State private var selectedProductName: String?
     @State private var selectedMerchantIDs: Set<UUID> = []
+    @State private var productSearchText = ""
+    @AppStorage("maxMerchantCountForComparison") private var maxMerchantCount = 5
 
     enum ComparisonStep {
         case selectProduct
@@ -26,7 +28,10 @@ struct PriceComparisonView: View {
 
     var uniqueProductNames: [String] {
         let names = Set(products.map { $0.name })
-        return Array(names).sorted()
+        let filtered = productSearchText.isEmpty ? Array(names) : Array(names).filter {
+            $0.localizedCaseInsensitiveContains(productSearchText)
+        }
+        return filtered.sorted()
     }
 
     var filteredMerchants: [Merchant] {
@@ -66,12 +71,21 @@ struct PriceComparisonView: View {
 
     private var productSelectionView: some View {
         List {
+            Section {
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(.secondary)
+                    TextField("搜索商品名称...", text: $productSearchText)
+                }
+                .padding(.vertical, 8)
+            }
+
             if uniqueProductNames.isEmpty {
                 Section {
                     EmptyStateView(
                         icon: "magnifyingglass",
-                        title: "没有商品数据",
-                        message: "先去录入一些商品数据吧"
+                        title: productSearchText.isEmpty ? "没有商品数据" : "未找到相关商品",
+                        message: productSearchText.isEmpty ? "先去录入一些商品数据吧" : "试试其他关键词"
                     )
                 }
             } else {
@@ -120,7 +134,7 @@ struct PriceComparisonView: View {
                     )
                 }
             } else {
-                Section("选择商家（最多5个）") {
+                Section("选择商家（最多\(maxMerchantCount)个）") {
                     ForEach(filteredMerchants) { merchant in
                         MerchantCheckboxRow(
                             merchant: merchant,
@@ -128,7 +142,7 @@ struct PriceComparisonView: View {
                         ) {
                             if selectedMerchantIDs.contains(merchant.id) {
                                 selectedMerchantIDs.remove(merchant.id)
-                            } else if selectedMerchantIDs.count < 5 {
+                            } else if selectedMerchantIDs.count < maxMerchantCount {
                                 selectedMerchantIDs.insert(merchant.id)
                             }
                         }
@@ -139,7 +153,7 @@ struct PriceComparisonView: View {
                     HStack {
                         Text("已选择")
                         Spacer()
-                        Text("\(selectedMerchantIDs.count)/5")
+                        Text("\(selectedMerchantIDs.count)/\(maxMerchantCount)")
                             .foregroundColor(.secondary)
                     }
                 }

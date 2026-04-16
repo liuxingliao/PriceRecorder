@@ -19,6 +19,8 @@ struct SettingsView: View {
     @State private var showingClearDataAlert = false
     @State private var showingStatistics = false
     @State private var showingAPIConfig = false
+    @State private var showingDebugConfig = false
+    @AppStorage("isICloudBackupEnabled") private var isICloudBackupEnabled = false
 
     var currentConfig: APIConfig {
         if let config = apiConfigs.first {
@@ -93,49 +95,65 @@ struct SettingsView: View {
                     }
                 }
 
-                Section("iCloud 备份") {
-                    HStack {
-                        Image(systemName: "icloud.fill")
-                            .foregroundColor(.blue)
-                            .frame(width: 30)
-                        Toggle("自动备份", isOn: $cloudSyncService.autoBackupEnabled)
-                            .onChange(of: cloudSyncService.autoBackupEnabled) { _, newValue in
-                                cloudSyncService.saveAutoBackupSetting(newValue)
-                            }
-                    }
-
-                    if let lastSync = cloudSyncService.lastSyncDate {
+                if isICloudBackupEnabled {
+                    Section("iCloud 备份") {
                         HStack {
-                            Image(systemName: "clock.fill")
-                                .foregroundColor(.secondary)
-                                .frame(width: 30)
-                            Text("上次同步")
-                            Spacer()
-                            Text(lastSync.formatted(date: .abbreviated, time: .shortened))
-                                .foregroundColor(.secondary)
-                        }
-                    }
-
-                    Button(action: {
-                        cloudSyncService.backupToCloud(modelContext: modelContext) { _, _ in
-                        }
-                    }) {
-                        HStack {
-                            Image(systemName: "arrow.up.doc.fill")
+                            Image(systemName: "icloud.fill")
                                 .foregroundColor(.blue)
                                 .frame(width: 30)
-                            if cloudSyncService.isSyncing {
-                                ProgressView()
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                            } else {
-                                Text("立即备份")
+                            Toggle("自动备份", isOn: $cloudSyncService.autoBackupEnabled)
+                                .onChange(of: cloudSyncService.autoBackupEnabled) { _, newValue in
+                                    cloudSyncService.saveAutoBackupSetting(newValue)
+                                }
+                        }
+
+                        if let lastSync = cloudSyncService.lastSyncDate {
+                            HStack {
+                                Image(systemName: "clock.fill")
+                                    .foregroundColor(.secondary)
+                                    .frame(width: 30)
+                                Text("上次同步")
+                                Spacer()
+                                Text(lastSync.formatted(date: .abbreviated, time: .shortened))
+                                    .foregroundColor(.secondary)
                             }
                         }
+
+                        Button(action: {
+                            cloudSyncService.backupToCloud(modelContext: modelContext) { _, _ in
+                            }
+                        }) {
+                            HStack {
+                                Image(systemName: "arrow.up.doc.fill")
+                                    .foregroundColor(.blue)
+                                    .frame(width: 30)
+                                if cloudSyncService.isSyncing {
+                                    ProgressView()
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                } else {
+                                    Text("立即备份")
+                                }
+                            }
+                        }
+                        .disabled(cloudSyncService.isSyncing)
                     }
-                    .disabled(cloudSyncService.isSyncing)
                 }
 
                 Section("调试") {
+                    Button(action: {
+                        showingDebugConfig = true
+                    }) {
+                        HStack {
+                            Image(systemName: "wrench.fill")
+                                .foregroundColor(.orange)
+                                .frame(width: 30)
+                            Text("调试配置")
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+
                     Button(role: .destructive, action: {
                         showingClearDataAlert = true
                     }) {
@@ -167,6 +185,9 @@ struct SettingsView: View {
             }
             .navigationDestination(isPresented: $showingAPIConfig) {
                 APIConfigView(config: currentConfig)
+            }
+            .sheet(isPresented: $showingDebugConfig) {
+                DebugConfigView()
             }
         }
     }

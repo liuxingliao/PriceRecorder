@@ -20,6 +20,7 @@ enum SortOption: String, CaseIterable {
 }
 
 struct SearchView: View {
+    @Environment(\.modelContext) private var modelContext
     @Query private var allProducts: [ProductRecord]
     @Query private var merchants: [Merchant]
 
@@ -29,6 +30,8 @@ struct SearchView: View {
     @State private var showingSortOptions = false
     @State private var selectedProduct: ProductRecord?
     @State private var showingPriceComparison = false
+    @State private var productToDelete: ProductRecord?
+    @State private var showingDeleteAlert = false
 
     // 商家字典缓存，避免重复查找
     private var merchantById: [UUID: Merchant] {
@@ -149,6 +152,20 @@ struct SearchView: View {
             .navigationDestination(isPresented: $showingPriceComparison) {
                 PriceComparisonView()
             }
+            .alert("确认删除商品?", isPresented: $showingDeleteAlert) {
+                Button("取消", role: .cancel) { }
+                Button("删除", role: .destructive) {
+                    if let product = productToDelete {
+                        modelContext.delete(product)
+                    }
+                }
+            } message: {
+                if let product = productToDelete {
+                    Text("确定要删除商品「\(product.name)」吗？此操作不可恢复。")
+                } else {
+                    Text("确定要删除此商品吗？此操作不可恢复。")
+                }
+            }
         }
     }
 
@@ -161,6 +178,14 @@ struct SearchView: View {
                     .contentShape(Rectangle())
                     .onTapGesture {
                         selectedProduct = product
+                    }
+                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                        Button(role: .destructive) {
+                            productToDelete = product
+                            showingDeleteAlert = true
+                        } label: {
+                            Label("删除", systemImage: "trash")
+                        }
                     }
             }
         }
@@ -197,20 +222,28 @@ struct SearchProductRow: View {
             }
 
             HStack {
-                Text(merchantName)
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
+                if let brand = product.brand {
+                    Text(brand)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
                 Spacer()
-                Text("\(product.quantity) \(product.unit)")
+                Text(String(format: "%.4f", product.quantity) + " \(product.unit)")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }
 
             HStack {
-                Text("单价: ¥\(String(format: "%.2f", product.unitPrice))/\(product.unit)")
+                Text(merchantName)
                     .font(.caption)
                     .foregroundColor(.secondary)
                 Spacer()
+                Text("单价: ¥\(String(format: "%.2f", product.unitPrice))/\(product.unit)")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+
+            HStack {
                 Text(product.purchaseDate.formatted(date: .abbreviated, time: .shortened))
                     .font(.caption)
                     .foregroundColor(.secondary)

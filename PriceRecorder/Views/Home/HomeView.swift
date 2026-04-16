@@ -118,7 +118,7 @@ struct ProductRow: View {
             }
 
             HStack {
-                Text("\(product.quantity) \(product.unit)")
+                Text(String(format: "%.4f", product.quantity) + " \(product.unit)")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
                 Spacer()

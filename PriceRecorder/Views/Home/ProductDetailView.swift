@@ -29,6 +29,9 @@ struct ProductDetailView: View {
     @State private var showingMerchantSelector = false
     @State private var showingImagePicker = false
     @State private var selectedImage: UIImage?
+    @State private var showingPhotoViewer = false
+    @State private var showingDeleteProductAlert = false
+    @AppStorage("photoQualityPercent") private var photoQualityPercent = 80
 
     init(product: ProductRecord) {
         self.product = product
@@ -70,6 +73,9 @@ struct ProductDetailView: View {
                         .scaledToFit()
                         .frame(maxHeight: 200)
                         .cornerRadius(10)
+                        .onTapGesture {
+                            showingPhotoViewer = true
+                        }
                 }
 
                 if isEditing {
@@ -79,6 +85,22 @@ struct ProductDetailView: View {
                 }
             }
             .padding()
+
+            if isEditing {
+                Button(role: .destructive, action: {
+                    showingDeleteProductAlert = true
+                }) {
+                    HStack {
+                        Image(systemName: "trash.fill")
+                        Text("删除商品")
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(10)
+                }
+                .padding(.horizontal)
+            }
         }
         .navigationTitle(isEditing ? "编辑商品" : "商品详情")
         .toolbar {
@@ -99,6 +121,15 @@ struct ProductDetailView: View {
                 }
             }
         }
+        .alert("确认删除商品?", isPresented: $showingDeleteProductAlert) {
+            Button("取消", role: .cancel) { }
+            Button("删除", role: .destructive) {
+                modelContext.delete(product)
+                dismiss()
+            }
+        } message: {
+            Text("确定要删除商品「\(product.name)」吗？此操作不可恢复。")
+        }
         .sheet(isPresented: $showingMerchantSelector) {
             MerchantSelectorView(selectedMerchantID: $editMerchantID)
         }
@@ -107,9 +138,19 @@ struct ProductDetailView: View {
                 showingImagePicker = false
             }
         }
+        .sheet(isPresented: $showingPhotoViewer) {
+            if let photoData = product.receiptPhoto {
+                PhotoViewer(imageData: photoData) {
+                    product.receiptPhoto = nil
+                }
+            }
+        }
         .onChange(of: selectedImage) { _, newImage in
-            if let image = newImage, let data = image.jpegData(compressionQuality: 0.8) {
-                product.receiptPhoto = data
+            if let image = newImage {
+                let quality = CGFloat(photoQualityPercent) / 100.0
+                if let data = image.jpegData(compressionQuality: quality) {
+                    product.receiptPhoto = data
+                }
             }
         }
         .onAppear {
@@ -155,7 +196,7 @@ struct ProductDetailView: View {
                 }) {
                     HStack {
                         Image(systemName: "camera.fill")
-                        Text("添加小票照片")
+                        Text("添加商品照片")
                     }
                 }
             }
@@ -408,7 +449,9 @@ struct ProductDetailView: View {
         product.updateTime = Date()
         isEditing = false
     }
+
 }
+
 
 struct DetailGroup<Content: View>: View {
     let title: String

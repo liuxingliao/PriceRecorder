@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		61AB25F02F91252D00434983 /* DebugConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AB25EE2F91252D00434983 /* DebugConfigView.swift */; };
+		61AB25F12F91252D00434983 /* LocationPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AB25EF2F91252D00434983 /* LocationPicker.swift */; };
+		61AB25F32F91255900434983 /* PhotoViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61AB25F22F91255900434983 /* PhotoViewer.swift */; };
 		AA01 /* PriceRecorderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA02 /* PriceRecorderApp.swift */; };
 		AA03 /* ProductRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA04 /* ProductRecord.swift */; };
 		AA05 /* Merchant.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA06 /* Merchant.swift */; };
@@ -31,6 +34,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		61AB25EE2F91252D00434983 /* DebugConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugConfigView.swift; sourceTree = "<group>"; };
+		61AB25EF2F91252D00434983 /* LocationPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPicker.swift; sourceTree = "<group>"; };
+		61AB25F22F91255900434983 /* PhotoViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewer.swift; sourceTree = "<group>"; };
 		AA02 /* PriceRecorderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceRecorderApp.swift; sourceTree = "<group>"; };
 		AA04 /* ProductRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRecord.swift; sourceTree = "<group>"; };
 		AA06 /* Merchant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Merchant.swift; sourceTree = "<group>"; };
@@ -139,6 +145,7 @@
 		AA34 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				61AB25F22F91255900434983 /* PhotoViewer.swift */,
 				AA14 /* CommonComponents.swift */,
 			);
 			path = Components;
@@ -164,6 +171,8 @@
 		AA37 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				61AB25EE2F91252D00434983 /* DebugConfigView.swift */,
+				61AB25EF2F91252D00434983 /* LocationPicker.swift */,
 				AA1C /* SettingsView.swift */,
 				AA1E /* MerchantManagementView.swift */,
 				AA22 /* DataManagementView.swift */,
@@ -262,8 +271,11 @@
 				AA03 /* ProductRecord.swift in Sources */,
 				AA05 /* Merchant.swift in Sources */,
 				AA07 /* MerchantCategory.swift in Sources */,
+				61AB25F02F91252D00434983 /* DebugConfigView.swift in Sources */,
+				61AB25F12F91252D00434983 /* LocationPicker.swift in Sources */,
 				AA0B /* Receipt.swift in Sources */,
 				AA0D /* OCRService.swift in Sources */,
+				61AB25F32F91255900434983 /* PhotoViewer.swift in Sources */,
 				AA0F /* CSVService.swift in Sources */,
 				AA11 /* CloudSyncService.swift in Sources */,
 				AA13 /* CommonComponents.swift in Sources */,
