@@ -30,6 +30,12 @@ struct SearchView: View {
     @State private var selectedProduct: ProductRecord?
     @State private var showingPriceComparison = false
 
+    // 商家字典缓存，避免重复查找
+    private var merchantById: [UUID: Merchant] {
+        Dictionary(uniqueKeysWithValues: merchants.map { ($0.id, $0) })
+    }
+
+    // 使用任务修饰符缓存过滤结果，避免重复计算
     var filteredProducts: [ProductRecord] {
         var products = searchText.isEmpty ? allProducts : allProducts.filter {
             $0.name.localizedCaseInsensitiveContains(searchText)
@@ -55,8 +61,9 @@ struct SearchView: View {
             groups[product.merchantID, default: []].append(product)
         }
 
+        let merchantDict = merchantById
         return groups.compactMap { merchantId, products in
-            guard let merchant = merchants.first(where: { $0.id == merchantId }) else {
+            guard let merchant = merchantDict[merchantId] else {
                 return nil
             }
             return (merchant, products)
@@ -147,8 +154,10 @@ struct SearchView: View {
 
     private var productResultsSection: some View {
         Section("搜索结果 (\(filteredProducts.count))") {
+            let merchantDict = merchantById
             ForEach(filteredProducts) { product in
-                SearchProductRow(product: product)
+                let merchantName = merchantDict[product.merchantID]?.name ?? "未知商家"
+                SearchProductRow(product: product, merchantName: merchantName)
                     .contentShape(Rectangle())
                     .onTapGesture {
                         selectedProduct = product
@@ -174,11 +183,7 @@ struct SearchView: View {
 
 struct SearchProductRow: View {
     let product: ProductRecord
-    @Query private var merchants: [Merchant]
-
-    var merchantName: String {
-        merchants.first { $0.id == product.merchantID }?.name ?? "未知商家"
-    }
+    let merchantName: String
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {

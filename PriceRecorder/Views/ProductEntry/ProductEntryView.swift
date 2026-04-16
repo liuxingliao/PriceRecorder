@@ -8,6 +8,67 @@
 import SwiftUI
 import SwiftData
 
+// 输入验证工具
+private struct ValidationError: LocalizedError {
+    let message: String
+
+    var errorDescription: String? {
+        message
+    }
+}
+
+private enum ProductValidation {
+    static func validateName(_ name: String) throws {
+        let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else {
+            throw ValidationError(message: "商品名称不能为空")
+        }
+        guard trimmed.count <= 100 else {
+            throw ValidationError(message: "商品名称不能超过100个字符")
+        }
+    }
+
+    static func validateQuantity(_ quantity: Double) throws {
+        guard quantity > 0 else {
+            throw ValidationError(message: "数量必须大于0")
+        }
+        guard quantity <= 1_000_000 else {
+            throw ValidationError(message: "数量不能超过1,000,000")
+        }
+    }
+
+    static func validateTotalPrice(_ price: Double) throws {
+        guard price > 0 else {
+            throw ValidationError(message: "总价必须大于0")
+        }
+        guard price <= 1_000_000 else {
+            throw ValidationError(message: "总价不能超过1,000,000")
+        }
+    }
+
+    static func validateUnit(_ unit: String) throws {
+        let trimmed = unit.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else {
+            throw ValidationError(message: "单位不能为空")
+        }
+        guard trimmed.count <= 20 else {
+            throw ValidationError(message: "单位不能超过20个字符")
+        }
+    }
+
+    static func validateProduct(
+        name: String,
+        quantity: Double,
+        unit: String,
+        totalPrice: Double
+    ) throws {
+        try validateName(name)
+        try validateQuantity(quantity)
+        try validateUnit(unit)
+        try validateTotalPrice(totalPrice)
+    }
+}
+
 struct ProductEntryView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
@@ -329,6 +390,8 @@ struct ProductEditSheet: View {
     @State private var spec: String?
     @State private var totalPrice: Double
     @State private var notes: String?
+    @State private var validationError: String?
+    @State private var showingValidationError = false
 
     init(product: PendingProduct, onSave: @escaping (PendingProduct) -> Void) {
         self.product = product
@@ -596,18 +659,37 @@ struct ProductEditSheet: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("保存") {
-                        var updated = product
-                        updated.name = name
-                        updated.brand = brand
-                        updated.quantity = quantity
-                        updated.unit = unit
-                        updated.spec = spec
-                        updated.totalPrice = totalPrice
-                        updated.notes = notes
-                        onSave(updated)
-                        dismiss()
+                        do {
+                            try ProductValidation.validateProduct(
+                                name: name,
+                                quantity: quantity,
+                                unit: unit,
+                                totalPrice: totalPrice
+                            )
+                            var updated = product
+                            updated.name = name
+                            updated.brand = brand
+                            updated.quantity = quantity
+                            updated.unit = unit
+                            updated.spec = spec
+                            updated.totalPrice = totalPrice
+                            updated.notes = notes
+                            onSave(updated)
+                            dismiss()
+                        } catch let error as ValidationError {
+                            validationError = error.message
+                            showingValidationError = true
+                        } catch {
+                            validationError = "保存失败，请重试"
+                            showingValidationError = true
+                        }
                     }
                 }
+            }
+            .alert("验证错误", isPresented: $showingValidationError) {
+                Button("确定", role: .cancel) { }
+            } message: {
+                Text(validationError ?? "未知错误")
             }
         }
     }

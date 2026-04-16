@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Vision
+@preconcurrency import Vision
 import UIKit
 
 struct OCRResult {
@@ -19,48 +19,89 @@ class OCRService {
 
     private init() {}
 
-    func recognizeText(from image: UIImage, completion: @escaping ([OCRResult], Error?) -> Void) {
-        guard let cgImage = image.cgImage else {
-            completion([], NSError(domain: "OCRService", code: -1, userInfo: [NSLocalizedDescriptionKey: "无法获取图片数据"]))
-            return
+    /// 最大图片尺寸（宽度或高度），用于压缩
+    private let maxImageDimension: CGFloat = 1024
+
+    /// 压缩图片到指定尺寸
+    private func compressImage(_ image: UIImage) -> UIImage {
+        let width = image.size.width
+        let height = image.size.height
+
+        // 如果图片已经小于最大尺寸，直接返回
+        guard width > maxImageDimension || height > maxImageDimension else {
+            return image
         }
 
-        let request = VNRecognizeTextRequest { request, error in
-            if let error = error {
-                DispatchQueue.main.async {
-                    completion([], error)
+        // 计算缩放比例
+        let scale = min(maxImageDimension / width, maxImageDimension / height)
+        let newSize = CGSize(width: width * scale, height: height * scale)
+
+        // 渲染压缩后的图片
+        let renderer = UIGraphicsImageRenderer(size: newSize)
+        let compressedImage = renderer.image { _ in
+            image.draw(in: CGRect(origin: .zero, size: newSize))
+        }
+
+        return compressedImage
+    }
+
+    /// 现代 async/await 版本的文字识别
+    func recognizeText(from image: UIImage) async throws -> [OCRResult] {
+        let compressedImage = compressImage(image)
+
+        guard let cgImage = compressedImage.cgImage else {
+            throw NSError(domain: "OCRService", code: -1, userInfo: [NSLocalizedDescriptionKey: "无法获取图片数据"])
+        }
+
+        return try await withCheckedThrowingContinuation { continuation in
+            let request = VNRecognizeTextRequest { request, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                    return
                 }
-                return
-            }
 
-            var results: [OCRResult] = []
+                var results: [OCRResult] = []
 
-            if let observations = request.results as? [VNRecognizedTextObservation] {
-                for observation in observations {
-                    if let topCandidate = observation.topCandidates(1).first {
-                        let result = OCRResult(
-                            text: topCandidate.string,
-                            boundingBox: observation.boundingBox
-                        )
-                        results.append(result)
+                if let observations = request.results as? [VNRecognizedTextObservation] {
+                    for observation in observations {
+                        if let topCandidate = observation.topCandidates(1).first {
+                            let result = OCRResult(
+                                text: topCandidate.string,
+                                boundingBox: observation.boundingBox
+                            )
+                            results.append(result)
+                        }
                     }
                 }
+
+                continuation.resume(returning: results)
             }
 
-            DispatchQueue.main.async {
-                completion(results, nil)
+            request.recognitionLevel = .accurate
+            request.usesLanguageCorrection = true
+            request.recognitionLanguages = ["zh-Hans", "en-US"]
+
+            let handler = VNImageRequestHandler(cgImage: cgImage, options: [:])
+
+            DispatchQueue.global(qos: .userInitiated).async {
+                do {
+                    try handler.perform([request])
+                } catch {
+                    continuation.resume(throwing: error)
+                }
             }
         }
+    }
 
-        request.recognitionLevel = .accurate
-        request.usesLanguageCorrection = true
-        request.recognitionLanguages = ["zh-Hans", "en-US"]
-
-        let handler = VNImageRequestHandler(cgImage: cgImage, options: [:])
-
-        DispatchQueue.global(qos: .userInitiated).async {
+    /// 保留兼容的 completion handler 版本
+    @available(*, deprecated, renamed: "recognizeText(from:)")
+    func recognizeText(from image: UIImage, completion: @escaping ([OCRResult], Error?) -> Void) {
+        Task {
             do {
-                try handler.perform([request])
+                let results = try await recognizeText(from: image)
+                DispatchQueue.main.async {
+                    completion(results, nil)
+                }
             } catch {
                 DispatchQueue.main.async {
                     completion([], error)
