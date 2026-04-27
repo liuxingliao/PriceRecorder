@@ -13,6 +13,8 @@ struct StatisticsView: View {
     @Query private var merchants: [Merchant]
     @Query private var categories: [MerchantCategory]
 
+    @State private var selectedMerchantForDetail: Merchant?
+
     var totalProducts: Int { products.count }
     var totalMerchants: Int { merchants.count }
     var totalCategories: Int { categories.count }
@@ -23,7 +25,7 @@ struct StatisticsView: View {
     }
 
     // 数据大小统计
-    var totalDataSize: Int {
+    var photoDataSize: Int {
         var total = 0
         for product in products {
             if let photoData = product.receiptPhoto {
@@ -31,6 +33,18 @@ struct StatisticsView: View {
             }
         }
         return total
+    }
+
+    var estimatedOtherDataSize: Int {
+        // 估算其他数据大小（商品元数据、商家、分类等）
+        let productBaseSize = products.count * 500 // 每个商品约500字节
+        let merchantSize = merchants.count * 300
+        let categorySize = categories.count * 200
+        return productBaseSize + merchantSize + categorySize
+    }
+
+    var totalDataSize: Int {
+        photoDataSize + estimatedOtherDataSize
     }
 
     func formatBytes(_ bytes: Int) -> String {
@@ -57,11 +71,29 @@ struct StatisticsView: View {
         return nil
     }
 
-    var merchantProductCounts: [(Merchant, Int)] {
+    var merchantProductCounts: [(Merchant, Int, Double)] {
         merchants.map { merchant in
-            let count = products.filter { $0.merchantID == merchant.id }.count
-            return (merchant, count)
-        }.sorted { $0.1 > $1.1 }
+            let merchantProducts = products.filter { $0.merchantID == merchant.id }
+            let count = merchantProducts.count
+            let spent = merchantProducts.reduce(0) { $0 + $1.totalPrice }
+            return (merchant, count, spent)
+        }.sorted { $0.2 > $1.2 } // 按消费总额倒序
+    }
+
+    func merchantStats(for merchant: Merchant) -> (totalSpent: Double, productCount: Int, categoryCounts: [(String, Int)]) {
+        let merchantProducts = products.filter { $0.merchantID == merchant.id }
+        let spent = merchantProducts.reduce(0) { $0 + $1.totalPrice }
+
+        var categoryDict: [String: Int] = [:]
+        for product in merchantProducts {
+            let category = merchant.categoryID.flatMap { catID in
+                categories.first { $0.id == catID }?.name
+            } ?? "未分类"
+            categoryDict[category, default: 0] += 1
+        }
+
+        let sortedCategories = categoryDict.sorted { $0.value > $1.value }
+        return (spent, merchantProducts.count, sortedCategories)
     }
 
     var body: some View {
@@ -74,7 +106,9 @@ struct StatisticsView: View {
 
             Section("数据统计") {
                 StatRow(icon: "photo.fill", label: "照片数量", value: "\(photosCount)")
-                StatRow(icon: "externaldrive.fill", label: "数据占用", value: formatBytes(totalDataSize))
+                StatRow(icon: "photo.on.rectangle.fill", label: "照片占用", value: formatBytes(photoDataSize))
+                StatRow(icon: "doc.text.fill", label: "其他数据", value: formatBytes(estimatedOtherDataSize))
+                StatRow(icon: "externaldrive.fill", label: "总占用", value: formatBytes(totalDataSize))
             }
 
             Section("消费统计") {
@@ -108,19 +142,101 @@ struct StatisticsView: View {
             }
 
             if !merchantProductCounts.isEmpty {
-                Section("商家商品数量") {
-                    ForEach(merchantProductCounts.prefix(5), id: \.0.id) { merchant, count in
-                        HStack {
-                            Text(merchant.name)
-                            Spacer()
-                            Text("\(count) 件")
-                                .foregroundColor(.secondary)
+                Section("商家统计") {
+                    ForEach(merchantProductCounts, id: \.0.id) { merchant, count, spent in
+                        Button(action: {
+                            selectedMerchantForDetail = merchant
+                        }) {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(merchant.name)
+                                        .font(.headline)
+                                    Text("\(count) 件商品")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+                                Spacer()
+                                VStack(alignment: .trailing, spacing: 4) {
+                                    Text(String(format: "¥%.2f", spent))
+                                        .font(.headline)
+                                        .foregroundColor(.blue)
+                                }
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.secondary)
+                            }
                         }
                     }
                 }
             }
         }
         .navigationTitle("数据统计")
+        .sheet(item: $selectedMerchantForDetail) { merchant in
+            MerchantDetailSheet(merchant: merchant, stats: merchantStats(for: merchant))
+        }
+    }
+}
+
+struct MerchantDetailSheet: View {
+    @Environment(\.dismiss) private var dismiss
+    let merchant: Merchant
+    let stats: (totalSpent: Double, productCount: Int, categoryCounts: [(String, Int)])
+
+    var body: some View {
+        NavigationStack {
+            List {
+                Section {
+                    VStack(spacing: 16) {
+                        Text(merchant.name)
+                            .font(.title2)
+                            .fontWeight(.bold)
+
+                        VStack(spacing: 4) {
+                            Text("总消费")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                            Text(String(format: "¥%.2f", stats.totalSpent))
+                                .font(.system(size: 36, weight: .bold))
+                                .foregroundColor(.blue)
+                        }
+
+                        HStack(spacing: 40) {
+                            VStack(spacing: 4) {
+                                Text("\(stats.productCount)")
+                                    .font(.title)
+                                    .fontWeight(.semibold)
+                                Text("商品")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 20)
+                }
+
+                if !stats.categoryCounts.isEmpty {
+                    Section("商品分类（按数量）") {
+                        ForEach(stats.categoryCounts, id: \.0) { category, count in
+                            HStack {
+                                Text(category)
+                                Spacer()
+                                Text("\(count) 件")
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                    }
+                }
+            }
+            .navigationTitle(merchant.name)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("完成") {
+                        dismiss()
+                    }
+                }
+            }
+        }
     }
 }
 

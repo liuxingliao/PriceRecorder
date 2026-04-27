@@ -31,6 +31,13 @@
 		AA50 /* APIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA51 /* APIConfig.swift */; };
 		AA54 /* APIConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA55 /* APIConfigView.swift */; };
 		AA60 /* DoubaoEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA61 /* DoubaoEntryView.swift */; };
+		AA70 /* AIMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA71 /* AIMessage.swift */; };
+		AA72 /* LLMConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA73 /* LLMConfig.swift */; };
+		AA74 /* BackupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA75 /* BackupService.swift */; };
+		AA80 /* AIChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA81 /* AIChatView.swift */; };
+		AA82 /* LLMConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA83 /* LLMConfigView.swift */; };
+		AA90 /* LLMDebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA91 /* LLMDebugLog.swift */; };
+		AA92 /* LLMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA93 /* LLMService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +66,13 @@
 		AA51 /* APIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfig.swift; sourceTree = "<group>"; };
 		AA55 /* APIConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfigView.swift; sourceTree = "<group>"; };
 		AA61 /* DoubaoEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubaoEntryView.swift; sourceTree = "<group>"; };
+		AA71 /* AIMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIMessage.swift; sourceTree = "<group>"; };
+		AA73 /* LLMConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMConfig.swift; sourceTree = "<group>"; };
+		AA75 /* BackupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupService.swift; sourceTree = "<group>"; };
+		AA81 /* AIChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIChatView.swift; sourceTree = "<group>"; };
+		AA83 /* LLMConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMConfigView.swift; sourceTree = "<group>"; };
+		AA91 /* LLMDebugLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMDebugLog.swift; sourceTree = "<group>"; };
+		AA93 /* LLMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +122,9 @@
 				AA08 /* MerchantCategory.swift */,
 				AA0C /* Receipt.swift */,
 				AA51 /* APIConfig.swift */,
+				AA71 /* AIMessage.swift */,
+				AA73 /* LLMConfig.swift */,
+				AA91 /* LLMDebugLog.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -131,6 +148,8 @@
 				AA0E /* OCRService.swift */,
 				AA10 /* CSVService.swift */,
 				AA12 /* CloudSyncService.swift */,
+				AA75 /* BackupService.swift */,
+				AA93 /* LLMService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -164,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				AA1A /* SearchView.swift */,
+				AA81 /* AIChatView.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -178,6 +198,7 @@
 				AA22 /* DataManagementView.swift */,
 				AA24 /* StatisticsView.swift */,
 				AA55 /* APIConfigView.swift */,
+				AA83 /* LLMConfigView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -291,6 +312,13 @@
 				AA50 /* APIConfig.swift in Sources */,
 				AA54 /* APIConfigView.swift in Sources */,
 				AA60 /* DoubaoEntryView.swift in Sources */,
+				AA70 /* AIMessage.swift in Sources */,
+				AA72 /* LLMConfig.swift in Sources */,
+				AA74 /* BackupService.swift in Sources */,
+				AA80 /* AIChatView.swift in Sources */,
+				AA82 /* LLMConfigView.swift in Sources */,
+				AA90 /* LLMDebugLog.swift in Sources */,
+				AA92 /* LLMService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +452,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CURRENT_PROJECT_VERSION = 1;
@@ -453,6 +482,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CURRENT_PROJECT_VERSION = 1;

@@ -28,6 +28,24 @@ private enum ProductValidation {
         }
     }
 
+    static func validateSpec(_ spec: String?) throws {
+        if let spec = spec, !spec.isEmpty {
+            let trimmed = spec.trimmingCharacters(in: .whitespacesAndNewlines)
+            guard trimmed.count <= 50 else {
+                throw ValidationError(message: "规格不能超过50个字符")
+            }
+        }
+    }
+
+    static func validateNotes(_ notes: String?) throws {
+        if let notes = notes, !notes.isEmpty {
+            let trimmed = notes.trimmingCharacters(in: .whitespacesAndNewlines)
+            guard trimmed.count <= 200 else {
+                throw ValidationError(message: "备注不能超过200个字符")
+            }
+        }
+    }
+
     static func validateQuantity(_ quantity: Double) throws {
         guard quantity > 0 else {
             throw ValidationError(message: "数量必须大于0")
@@ -58,11 +76,15 @@ private enum ProductValidation {
 
     static func validateProduct(
         name: String,
+        spec: String?,
+        notes: String?,
         quantity: Double,
         unit: String,
         totalPrice: Double
     ) throws {
         try validateName(name)
+        try validateSpec(spec)
+        try validateNotes(notes)
         try validateQuantity(quantity)
         try validateUnit(unit)
         try validateTotalPrice(totalPrice)
@@ -336,7 +358,7 @@ struct ProductEntryView: View {
                 totalPrice: pending.totalPrice,
                 merchantID: merchantID,
                 purchaseDate: purchaseDate,
-                receiptPhoto: nil,
+                receiptPhoto: pending.receiptPhoto,
                 notes: pending.notes
             )
             modelContext.insert(product)
@@ -390,6 +412,10 @@ struct ProductEditSheet: View {
     @State private var spec: String?
     @State private var totalPrice: Double
     @State private var notes: String?
+    @State private var receiptPhoto: Data?
+    @State private var photoQuality: PhotoQuality = .compressed
+    @State private var showingImagePicker = false
+    @State private var inputImage: UIImage?
     @State private var validationError: String?
     @State private var showingValidationError = false
 
@@ -403,6 +429,7 @@ struct ProductEditSheet: View {
         _spec = State(initialValue: product.spec)
         _totalPrice = State(initialValue: product.totalPrice)
         _notes = State(initialValue: product.notes)
+        _receiptPhoto = State(initialValue: product.receiptPhoto)
     }
 
     var unitPrice: Double {
@@ -630,6 +657,60 @@ struct ProductEditSheet: View {
                         .cornerRadius(10)
                     }
 
+                    // 照片区域
+                    VStack(alignment: .leading, spacing: 16) {
+                        Text("小票照片")
+                            .font(.headline)
+                            .foregroundColor(.secondary)
+
+                        VStack(spacing: 12) {
+                            if let photoData = receiptPhoto, let uiImage = UIImage(data: photoData) {
+                                Image(uiImage: uiImage)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(maxHeight: 200)
+                                    .cornerRadius(8)
+
+                                Button(role: .destructive, action: {
+                                    receiptPhoto = nil
+                                }) {
+                                    Text("删除照片")
+                                }
+                            } else {
+                                Button(action: {
+                                    showingImagePicker = true
+                                }) {
+                                    HStack {
+                                        Image(systemName: "camera")
+                                        Text("添加小票照片")
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                    .padding()
+                                    .background(Color(.systemGray5))
+                                    .cornerRadius(8)
+                                }
+                            }
+
+                            if receiptPhoto != nil {
+                                VStack(alignment: .leading, spacing: 8) {
+                                    Text("照片质量")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+
+                                    Picker("照片质量", selection: $photoQuality) {
+                                        ForEach(PhotoQuality.allCases) { quality in
+                                            Text(quality.displayName).tag(quality)
+                                        }
+                                    }
+                                    .pickerStyle(.segmented)
+                                }
+                            }
+                        }
+                        .padding()
+                        .background(Color(.systemGray6))
+                        .cornerRadius(10)
+                    }
+
                     // 备注区域
                     VStack(alignment: .leading, spacing: 16) {
                         Text("备注")
@@ -662,6 +743,8 @@ struct ProductEditSheet: View {
                         do {
                             try ProductValidation.validateProduct(
                                 name: name,
+                                spec: spec,
+                                notes: notes,
                                 quantity: quantity,
                                 unit: unit,
                                 totalPrice: totalPrice
@@ -674,6 +757,7 @@ struct ProductEditSheet: View {
                             updated.spec = spec
                             updated.totalPrice = totalPrice
                             updated.notes = notes
+                            updated.receiptPhoto = receiptPhoto
                             onSave(updated)
                             dismiss()
                         } catch let error as ValidationError {
@@ -684,6 +768,14 @@ struct ProductEditSheet: View {
                             showingValidationError = true
                         }
                     }
+                }
+            }
+            .sheet(isPresented: $showingImagePicker) {
+                ImagePicker(image: $inputImage)
+            }
+            .onChange(of: inputImage) { _, newImage in
+                if let image = newImage {
+                    receiptPhoto = PhotoService.shared.processImage(image, quality: photoQuality)
                 }
             }
             .alert("验证错误", isPresented: $showingValidationError) {

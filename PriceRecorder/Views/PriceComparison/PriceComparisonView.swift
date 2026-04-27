@@ -19,6 +19,38 @@ struct PriceComparisonView: View {
     @State private var selectedMerchantIDs: Set<UUID> = []
     @State private var productSearchText = ""
     @AppStorage("maxMerchantCountForComparison") private var maxMerchantCount = 5
+    @State private var selectedChartDate: Date?
+    @State private var chartScrollPosition: Date?
+    @State private var isScrollingEnabled = true
+
+    enum TimeRange: String, CaseIterable, Identifiable {
+        case day = "日"
+        case week = "周"
+        case month = "月"
+        case year = "年"
+
+        var id: String { rawValue }
+
+        var days: Int {
+            switch self {
+            case .day: return 7
+            case .week: return 14
+            case .month: return 30
+            case .year: return 365
+            }
+        }
+
+        var striding: Calendar.Component {
+            switch self {
+            case .day: return .day
+            case .week: return .weekOfYear
+            case .month: return .month
+            case .year: return .year
+            }
+        }
+    }
+
+    @State private var selectedTimeRange: TimeRange = .month
 
     enum ComparisonStep {
         case selectProduct
@@ -203,24 +235,105 @@ struct PriceComparisonView: View {
 
     private var priceTrendChart: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("历史价格趋势")
-                .font(.headline)
+            HStack {
+                Text("历史价格趋势")
+                    .font(.headline)
 
-            if #available(iOS 16.0, *) {
-                Chart {
-                    ForEach(comparisonData, id: \.merchant.id) { data in
-                        ForEach(data.records) { record in
-                            LineMark(
-                                x: .value("日期", record.purchaseDate),
-                                y: .value("单价", record.unitPrice)
-                            )
-                            .foregroundStyle(by: .value("商家", data.merchant.name))
-                        }
+                Spacer()
+
+                Picker("时间范围", selection: $selectedTimeRange) {
+                    ForEach(TimeRange.allCases) { range in
+                        Text(range.rawValue).tag(range)
                     }
                 }
-                .frame(height: 250)
-                .chartXAxisLabel("日期")
-                .chartYAxisLabel("单价 (¥)")
+                .pickerStyle(.segmented)
+                .frame(width: 200)
+            }
+
+            if #available(iOS 16.0, *) {
+                VStack(spacing: 12) {
+                    Chart {
+                        ForEach(comparisonData, id: \.merchant.id) { data in
+                            ForEach(data.records) { record in
+                                LineMark(
+                                    x: .value("日期", record.purchaseDate),
+                                    y: .value("单价", record.unitPrice)
+                                )
+                                .foregroundStyle(by: .value("商家", data.merchant.name))
+                                .symbol(by: .value("商家", data.merchant.name))
+                            }
+                        }
+
+                        if let selectedDate = selectedChartDate {
+                            RuleMark(x: .value("选中日期", selectedDate))
+                                .foregroundStyle(Color.blue.opacity(0.5))
+                                .lineStyle(StrokeStyle(lineWidth: 2, dash: [5, 5]))
+
+                            ForEach(comparisonData, id: \.merchant.id) { data in
+                                if let record = data.records.first(where: {
+                                    Calendar.current.isDate($0.purchaseDate, inSameDayAs: selectedDate)
+                                }) {
+                                    PointMark(
+                                        x: .value("日期", record.purchaseDate),
+                                        y: .value("单价", record.unitPrice)
+                                    )
+                                    .foregroundStyle(by: .value("商家", data.merchant.name))
+                                    .symbolSize(120)
+                                }
+                            }
+                        }
+                    }
+                    .frame(height: 250)
+                    .chartXAxisLabel("日期")
+                    .chartYAxisLabel("单价 (¥)")
+                    .chartScrollableAxes(.horizontal)
+                    .chartXVisibleDomain(length: TimeInterval(selectedTimeRange.days * 24 * 60 * 60))
+                    .chartXAxis {
+                        AxisMarks(values: .stride(by: selectedTimeRange.striding, count: 1)) { value in
+                            AxisGridLine()
+                            AxisTick()
+                            AxisValueLabel(format: .dateTime.day().month())
+                        }
+                    }
+                    .chartOverlay { proxy in
+                        GeometryReader { geometry in
+                            Rectangle()
+                                .fill(.clear)
+                                .contentShape(Rectangle())
+                                .onTapGesture { location in
+                                    let xPos = location.x - geometry[proxy.plotAreaFrame].origin.x
+                                    if let date: Date = proxy.value(atX: xPos) {
+                                        withAnimation(.easeInOut(duration: 0.2)) {
+                                            if selectedChartDate != nil && Calendar.current.isDate(date, inSameDayAs: selectedChartDate!) {
+                                                selectedChartDate = nil
+                                            } else {
+                                                selectedChartDate = date
+                                            }
+                                        }
+                                    }
+                                }
+                                .simultaneousGesture(
+                                    DragGesture(minimumDistance: 0)
+                                        .onChanged { value in
+                                            let xPos = value.location.x - geometry[proxy.plotAreaFrame].origin.x
+                                            if let date: Date = proxy.value(atX: xPos) {
+                                                if selectedChartDate == nil {
+                                                    withAnimation(.easeInOut(duration: 0.2)) {
+                                                        selectedChartDate = date
+                                                    }
+                                                } else {
+                                                    selectedChartDate = date
+                                                }
+                                            }
+                                        }
+                                )
+                        }
+                    }
+
+                    if let selectedDate = selectedChartDate {
+                        chartSelectionDetail(selectedDate)
+                    }
+                }
             } else {
                 Text("图表需要 iOS 16+")
                     .foregroundColor(.secondary)
@@ -230,6 +343,55 @@ struct PriceComparisonView: View {
         .padding()
         .background(Color(.systemGray6))
         .cornerRadius(12)
+    }
+
+    @available(iOS 16.0, *)
+    private func chartSelectionDetail(_ date: Date) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Text(date.formatted(date: .abbreviated, time: .omitted))
+                    .font(.subheadline)
+                    .fontWeight(.medium)
+
+                Spacer()
+
+                Button(action: {
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        selectedChartDate = nil
+                    }
+                }) {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundColor(.secondary)
+                        .font(.title3)
+                }
+            }
+
+            Divider()
+
+            ForEach(comparisonData, id: \.merchant.id) { data in
+                if let record = data.records.first(where: {
+                    Calendar.current.isDate($0.purchaseDate, inSameDayAs: date)
+                }) {
+                    HStack {
+                        Text(data.merchant.name)
+                            .font(.subheadline)
+                        Spacer()
+                        Text(String(format: "¥%.2f", record.unitPrice))
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                    }
+                }
+            }
+
+            Text("点击图表任意位置或X关闭")
+                .font(.caption)
+                .foregroundColor(.secondary)
+                .frame(maxWidth: .infinity, alignment: .center)
+        }
+        .padding()
+        .background(Color(.systemBackground))
+        .cornerRadius(12)
+        .shadow(color: .black.opacity(0.1), radius: 8, y: 2)
     }
 
     private var latestPriceComparison: some View {

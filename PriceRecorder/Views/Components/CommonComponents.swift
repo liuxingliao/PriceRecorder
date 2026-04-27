@@ -212,9 +212,9 @@ struct SuggestionTextField: View {
 struct ImagePicker: UIViewControllerRepresentable {
     @Binding var image: UIImage?
     let sourceType: UIImagePickerController.SourceType
-    let onDismiss: () -> Void
+    let onDismiss: (() -> Void)?
 
-    init(image: Binding<UIImage?>, sourceType: UIImagePickerController.SourceType = .photoLibrary, onDismiss: @escaping () -> Void) {
+    init(image: Binding<UIImage?>, sourceType: UIImagePickerController.SourceType = .photoLibrary, onDismiss: (() -> Void)? = nil) {
         self._image = image
         self.sourceType = sourceType
         self.onDismiss = onDismiss
@@ -245,13 +245,13 @@ struct ImagePicker: UIViewControllerRepresentable {
                 parent.image = image
             }
             picker.dismiss(animated: true) {
-                self.parent.onDismiss()
+                self.parent.onDismiss?()
             }
         }
 
         func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
             picker.dismiss(animated: true) {
-                self.parent.onDismiss()
+                self.parent.onDismiss?()
             }
         }
     }

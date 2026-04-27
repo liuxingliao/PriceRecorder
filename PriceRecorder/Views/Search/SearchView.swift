@@ -32,6 +32,7 @@ struct SearchView: View {
     @State private var showingPriceComparison = false
     @State private var productToDelete: ProductRecord?
     @State private var showingDeleteAlert = false
+    @State private var showingAIChat = false
 
     // 商家字典缓存，避免重复查找
     private var merchantById: [UUID: Merchant] {
@@ -133,6 +134,16 @@ struct SearchView: View {
             }
             .navigationTitle("搜索")
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        showingAIChat = true
+                    }) {
+                        HStack(spacing: 4) {
+                            Image(systemName: "brain.head.profile")
+                            Text("AI咨询")
+                        }
+                    }
+                }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("比价") {
                         showingPriceComparison = true
@@ -151,6 +162,9 @@ struct SearchView: View {
             }
             .navigationDestination(isPresented: $showingPriceComparison) {
                 PriceComparisonView()
+            }
+            .sheet(isPresented: $showingAIChat) {
+                AIChatView()
             }
             .alert("确认删除商品?", isPresented: $showingDeleteAlert) {
                 Button("取消", role: .cancel) { }

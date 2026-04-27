@@ -1,0 +1,350 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -scheme PriceRecorder -configuration Debug build
+
+2026-04-26 23:00:21.886 xcodebuild[34829:3150828] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS, id:dvtdevice-DVTiPhonePlaceholder-iphoneos:placeholder, name:Any iOS Device }
+{ platform:iOS Simulator, id:dvtdevice-DVTiOSDeviceSimulatorPlaceholder-iphonesimulator:placeholder, name:Any iOS Simulator Device }
+{ platform:iOS Simulator, arch:x86_64, id:C1CF81F1-4CFD-4C54-86ED-13CC17C9AC4E, OS:26.4.1, name:iPad (A16) }
+{ platform:iOS Simulator, arch:x86_64, id:88117712-7A92-4560-89BF-AFEEF2AF1D01, OS:26.4.1, name:iPad Air 11-inch (M4) }
+{ platform:iOS Simulator, arch:x86_64, id:82042DE7-24F3-4535-AF6C-CDDF45FDE499, OS:26.4.1, name:iPad Air 13-inch (M4) }
+{ platform:iOS Simulator, arch:x86_64, id:858FCF1F-3BBF-42A7-B9BC-F1EE8E066B05, OS:26.4.1, name:iPad Pro 11-inch (M5) }
+{ platform:iOS Simulator, arch:x86_64, id:84500B1A-8475-43F6-A580-B0ACBA4936C4, OS:26.4.1, name:iPad Pro 13-inch (M5) }
+{ platform:iOS Simulator, arch:x86_64, id:DA1052F4-62BB-4ABC-982C-FAD972D831B1, OS:26.4.1, name:iPad mini (A17 Pro) }
+{ platform:iOS Simulator, arch:x86_64, id:EE6C36AC-251B-4182-99DA-10724F04F6C6, OS:26.4.1, name:iPhone 17 }
+{ platform:iOS Simulator, arch:x86_64, id:08A6D425-1F9F-434D-A76F-91BC4B89D40B, OS:26.4.1, name:iPhone 17 Pro }
+{ platform:iOS Simulator, arch:x86_64, id:6F7C42A4-91FA-4488-BB75-966A0B7DA131, OS:26.4.1, name:iPhone 17 Pro Max }
+{ platform:iOS Simulator, arch:x86_64, id:0DA7CE39-34BC-4537-9D35-FE4E46A5CF6B, OS:26.4.1, name:iPhone 17e }
+{ platform:iOS Simulator, arch:x86_64, id:F0A8C773-CF2A-4637-8494-4DEC8DF9E8FF, OS:26.4.1, name:iPhone Air }
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (1 target)
+    Target 'PriceRecorder' in project 'PriceRecorder' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.4.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc --version
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -version_details
+
+Build description signature: 37250b831dd8296e04559c1cc0740e51
+Build description path: /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/XCBuildData/37250b831dd8296e04559c1cc0740e51.xcbuilddata
+ClangStatCache /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.4.sdk /Users/liuxl/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphoneos26.4-23E252-68a138bb55de9ba35ce6c8c40d12849e.sdkstatcache
+    cd /Users/liuxl/workspace/PriceRecorder/PriceRecorder.xcodeproj
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.4.sdk -o /Users/liuxl/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphoneos26.4-23E252-68a138bb55de9ba35ce6c8c40d12849e.sdkstatcache
+
+WriteAuxiliaryFile /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder.SwiftConstValuesFileList (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    write-file /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder.SwiftConstValuesFileList
+
+WriteAuxiliaryFile /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder.SwiftFileList (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    write-file /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder.SwiftFileList
+
+WriteAuxiliaryFile /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder.LinkFileList (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    write-file /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder.LinkFileList
+
+WriteAuxiliaryFile /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder-OutputFileMap.json (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    write-file /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder-OutputFileMap.json
+
+ProcessInfoPlistFile /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app/Info.plist /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/empty-PriceRecorder.plist (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    builtin-infoPlistUtility /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/empty-PriceRecorder.plist -producttype com.apple.product-type.application -genpkginfo /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app/PkgInfo -expandbuildsettings -format binary -platform iphoneos -requiredArchitecture arm64 -o /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app/Info.plist
+
+SwiftDriver PriceRecorder normal arm64 com.apple.xcode.tools.swift.compiler (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    builtin-SwiftDriver -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name PriceRecorder -Onone @/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.4.sdk -target arm64-apple-ios17.0 -g -module-cache-path /Users/liuxl/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos -F /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos -emit-localized-strings -emit-localized-strings-path /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64 -c -j8 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/liuxl/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphoneos26.4-23E252-68a138bb55de9ba35ce6c8c40d12849e.sdkstatcache -output-file-map /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/liuxl/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/liuxl/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/liuxl/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder_const_extract_protocols.json -Xcc -iquote -Xcc /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/PriceRecorder-generated-files.hmap -Xcc -I/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/PriceRecorder-own-target-headers.hmap -Xcc -I/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/PriceRecorder-all-target-headers.hmap -Xcc -iquote -Xcc /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/PriceRecorder-project-headers.hmap -Xcc -I/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/include -Xcc -I/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/DerivedSources-normal/arm64 -Xcc -I/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/DerivedSources/arm64 -Xcc -I/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder-Swift.h -working-directory /Users/liuxl/workspace/PriceRecorder -experimental-emit-module-separately -disable-cmo
+
+SwiftEmitModule normal arm64 Emitting\ module\ for\ PriceRecorder (in target 'PriceRecorder' from project 'PriceRecorder')
+
+EmitSwiftModule normal arm64 (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftCompile normal arm64 Compiling\ MerchantManagementView.swift,\ DataManagementView.swift,\ StatisticsView.swift,\ ProductEntryView.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Settings/MerchantManagementView.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Settings/DataManagementView.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Settings/StatisticsView.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/ProductEntry/ProductEntryView.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Settings/MerchantManagementView.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Settings/DataManagementView.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Settings/StatisticsView.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+/Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Settings/StatisticsView.swift:88:13: warning: immutable value 'product' was never used; consider replacing with '_' or removing it
+        for product in merchantProducts {
+            ^~~~~~~
+            _
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/ProductEntry/ProductEntryView.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftCompile normal arm64 Compiling\ PriceRecorderApp.swift,\ ProductRecord.swift,\ Merchant.swift,\ MerchantCategory.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/PriceRecorderApp.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Models/ProductRecord.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Models/Merchant.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Models/MerchantCategory.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/PriceRecorderApp.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Models/ProductRecord.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Models/Merchant.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Models/MerchantCategory.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftCompile normal arm64 Compiling\ HomeView.swift,\ ProductDetailView.swift,\ SearchView.swift,\ SettingsView.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Home/HomeView.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Home/ProductDetailView.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Search/SearchView.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Settings/SettingsView.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Home/HomeView.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Home/ProductDetailView.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Search/SearchView.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Settings/SettingsView.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftCompile normal arm64 Compiling\ AIMessage.swift,\ LLMConfig.swift,\ BackupService.swift,\ AIChatView.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Models/AIMessage.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Models/LLMConfig.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Services/BackupService.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Search/AIChatView.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Models/AIMessage.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Models/LLMConfig.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Services/BackupService.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Search/AIChatView.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftCompile normal arm64 Compiling\ DebugConfigView.swift,\ LocationPicker.swift,\ Receipt.swift,\ OCRService.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Settings/DebugConfigView.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Settings/LocationPicker.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Models/Receipt.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Services/OCRService.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Settings/DebugConfigView.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Settings/LocationPicker.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Models/Receipt.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Services/OCRService.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftCompile normal arm64 Compiling\ PriceComparisonView.swift,\ APIConfig.swift,\ APIConfigView.swift,\ DoubaoEntryView.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/PriceComparison/PriceComparisonView.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Models/APIConfig.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Settings/APIConfigView.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/ProductEntry/DoubaoEntryView.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/PriceComparison/PriceComparisonView.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+/Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/PriceComparison/PriceComparisonView.swift:256:94: warning: 'plotAreaFrame' was deprecated in iOS 17.0: renamed to 'plotFrame'
+                                                let xPos = value.location.x - geometry[proxy.plotAreaFrame].origin.x
+                                                                                             ^
+/Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/PriceComparison/PriceComparisonView.swift:256:94: note: use 'plotFrame' instead
+                                                let xPos = value.location.x - geometry[proxy.plotAreaFrame].origin.x
+                                                                                             ^~~~~~~~~~~~~
+                                                                                             plotFrame
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Models/APIConfig.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Settings/APIConfigView.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/ProductEntry/DoubaoEntryView.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftCompile normal arm64 Compiling\ PhotoViewer.swift,\ CSVService.swift,\ CloudSyncService.swift,\ CommonComponents.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Components/PhotoViewer.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Services/CSVService.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Services/CloudSyncService.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Components/CommonComponents.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Components/PhotoViewer.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+/Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Components/PhotoViewer.swift:82:24: warning: value 'onDelete' was defined but never used; consider replacing with boolean test
+                if let onDelete = onDelete {
+                   ~~~~^~~~~~~~~~~
+                                           != nil
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Services/CSVService.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Services/CloudSyncService.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Components/CommonComponents.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftCompile normal arm64 Compiling\ LLMConfigView.swift,\ LLMDebugLog.swift,\ LLMService.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Settings/LLMConfigView.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Models/LLMDebugLog.swift /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Services/LLMService.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Views/Settings/LLMConfigView.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Models/LLMDebugLog.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftCompile normal arm64 /Users/liuxl/workspace/PriceRecorder/PriceRecorder/Services/LLMService.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+
+SwiftDriverJobDiscovery normal arm64 Compiling PriceRecorderApp.swift, ProductRecord.swift, Merchant.swift, MerchantCategory.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+
+SwiftDriverJobDiscovery normal arm64 Emitting module for PriceRecorder (in target 'PriceRecorder' from project 'PriceRecorder')
+
+SwiftDriver\ Compilation\ Requirements PriceRecorder normal arm64 com.apple.xcode.tools.swift.compiler (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    builtin-Swift-Compilation-Requirements -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name PriceRecorder -Onone @/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.4.sdk -target arm64-apple-ios17.0 -g -module-cache-path /Users/liuxl/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos -F /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos -emit-localized-strings -emit-localized-strings-path /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64 -c -j8 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/liuxl/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphoneos26.4-23E252-68a138bb55de9ba35ce6c8c40d12849e.sdkstatcache -output-file-map /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/liuxl/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/liuxl/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/liuxl/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder_const_extract_protocols.json -Xcc -iquote -Xcc /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/PriceRecorder-generated-files.hmap -Xcc -I/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/PriceRecorder-own-target-headers.hmap -Xcc -I/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/PriceRecorder-all-target-headers.hmap -Xcc -iquote -Xcc /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/PriceRecorder-project-headers.hmap -Xcc -I/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/include -Xcc -I/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/DerivedSources-normal/arm64 -Xcc -I/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/DerivedSources/arm64 -Xcc -I/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder-Swift.h -working-directory /Users/liuxl/workspace/PriceRecorder -experimental-emit-module-separately -disable-cmo
+
+SwiftMergeGeneratedHeaders /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/DerivedSources/PriceRecorder-Swift.h /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder-Swift.h (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    builtin-swiftHeaderTool -arch arm64 /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder-Swift.h -o /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/DerivedSources/PriceRecorder-Swift.h
+
+Copy /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.swiftmodule/arm64-apple-ios.swiftmodule /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder.swiftmodule (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder.swiftmodule /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.swiftmodule/arm64-apple-ios.swiftmodule
+
+Copy /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.swiftmodule/arm64-apple-ios.swiftdoc /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder.swiftdoc (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder.swiftdoc /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.swiftmodule/arm64-apple-ios.swiftdoc
+
+Copy /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.swiftmodule/arm64-apple-ios.abi.json /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder.abi.json (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder.abi.json /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.swiftmodule/arm64-apple-ios.abi.json
+
+Copy /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder.swiftsourceinfo (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder.swiftsourceinfo /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo
+
+SwiftDriverJobDiscovery normal arm64 Compiling PhotoViewer.swift, CSVService.swift, CloudSyncService.swift, CommonComponents.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+
+SwiftDriverJobDiscovery normal arm64 Compiling DebugConfigView.swift, LocationPicker.swift, Receipt.swift, OCRService.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+
+SwiftDriverJobDiscovery normal arm64 Compiling AIMessage.swift, LLMConfig.swift, BackupService.swift, AIChatView.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+
+SwiftDriverJobDiscovery normal arm64 Compiling LLMConfigView.swift, LLMDebugLog.swift, LLMService.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+
+SwiftDriverJobDiscovery normal arm64 Compiling HomeView.swift, ProductDetailView.swift, SearchView.swift, SettingsView.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+
+SwiftDriverJobDiscovery normal arm64 Compiling PriceComparisonView.swift, APIConfig.swift, APIConfigView.swift, DoubaoEntryView.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+
+SwiftDriverJobDiscovery normal arm64 Compiling MerchantManagementView.swift, DataManagementView.swift, StatisticsView.swift, ProductEntryView.swift (in target 'PriceRecorder' from project 'PriceRecorder')
+
+SwiftDriver\ Compilation PriceRecorder normal arm64 com.apple.xcode.tools.swift.compiler (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    builtin-Swift-Compilation -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name PriceRecorder -Onone @/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.4.sdk -target arm64-apple-ios17.0 -g -module-cache-path /Users/liuxl/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos -F /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos -emit-localized-strings -emit-localized-strings-path /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64 -c -j8 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/liuxl/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphoneos26.4-23E252-68a138bb55de9ba35ce6c8c40d12849e.sdkstatcache -output-file-map /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/liuxl/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/liuxl/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/liuxl/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder_const_extract_protocols.json -Xcc -iquote -Xcc /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/PriceRecorder-generated-files.hmap -Xcc -I/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/PriceRecorder-own-target-headers.hmap -Xcc -I/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/PriceRecorder-all-target-headers.hmap -Xcc -iquote -Xcc /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/PriceRecorder-project-headers.hmap -Xcc -I/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/include -Xcc -I/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/DerivedSources-normal/arm64 -Xcc -I/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/DerivedSources/arm64 -Xcc -I/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder-Swift.h -working-directory /Users/liuxl/workspace/PriceRecorder -experimental-emit-module-separately -disable-cmo
+
+Ld /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app/PriceRecorder.debug.dylib normal (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios17.0 -dynamiclib -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.4.sdk -O0 -L/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphoneos -L/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos -F/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphoneos -F/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos -filelist /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder.LinkFileList -install_name @rpath/PriceRecorder.debug.dylib -Xlinker -rpath -Xlinker /usr/lib/swift -Xlinker -rpath -Xlinker @executable_path/Frameworks -Xlinker -dead_strip -Xlinker -object_path_lto -Xlinker /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder_lto.o -rdynamic -Xlinker -no_deduplicate -Xlinker -dependency_info -Xlinker /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder_dependency_info.dat -fobjc-link-runtime -L/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos -L/usr/lib/swift -Xlinker -add_ast_path -Xlinker /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder.swiftmodule @/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder-linker-args.resp -Xlinker -alias -Xlinker _main -Xlinker ___debug_main_executable_dylib_entry_point -Xlinker -no_adhoc_codesign -o /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app/PriceRecorder.debug.dylib
+
+ConstructStubExecutorLinkFileList /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/PriceRecorder-ExecutorLinkFileList-normal-arm64.txt (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    construct-stub-executor-link-file-list /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app/PriceRecorder.debug.dylib /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/libPreviewsJITStubExecutor_no_swift_entry_point.a /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/libPreviewsJITStubExecutor.a --output /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/PriceRecorder-ExecutorLinkFileList-normal-arm64.txt
+note: Using stub executor library with Swift entry point. (in target 'PriceRecorder' from project 'PriceRecorder')
+
+Ld /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app/PriceRecorder normal (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios17.0 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.4.sdk -O0 -L/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos -F/Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos -Xlinker -rpath -Xlinker @executable_path -Xlinker -rpath -Xlinker @executable_path/Frameworks -rdynamic -Xlinker -no_deduplicate -e ___debug_blank_executor_main -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __debug_dylib -Xlinker /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/PriceRecorder-DebugDylibPath-normal-arm64.txt -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __debug_instlnm -Xlinker /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/PriceRecorder-DebugDylibInstallName-normal-arm64.txt -Xlinker -filelist -Xlinker /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/PriceRecorder-ExecutorLinkFileList-normal-arm64.txt /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app/PriceRecorder.debug.dylib -Xlinker -no_adhoc_codesign -o /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app/PriceRecorder
+
+ExtractAppIntentsMetadata (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsmetadataprocessor --toolchain-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --module-name PriceRecorder --sdk-root /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.4.sdk --xcode-version 17E202 --platform-family iOS --deployment-target 17.0 --bundle-identifier com.example.PriceRecorder --output /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app --target-triple arm64-apple-ios17.0 --binary-file /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app/PriceRecorder --dependency-file /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder_dependency_info.dat --stringsdata-file /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/ExtractedAppShortcutsMetadata.stringsdata --source-file-list /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder.SwiftFileList --metadata-file-list /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/PriceRecorder.DependencyMetadataFileList --static-metadata-file-list /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/PriceRecorder.DependencyStaticMetadataFileList --swift-const-vals-list /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/Objects-normal/arm64/PriceRecorder.SwiftConstValuesFileList --compile-time-extraction --deployment-aware-processing --validate-assistant-intents --no-app-shortcuts-localization
+2026-04-26 23:00:38.013 appintentsmetadataprocessor[34913:3151333] Starting appintentsmetadataprocessor export
+2026-04-26 23:00:38.018 appintentsmetadataprocessor[34913:3151333] warning: Metadata extraction skipped. No AppIntents.framework dependency found.
+
+CopySwiftLibs /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    builtin-swiftStdLibTool --copy --verbose --sign C392BAB7A9D24828810BD7E2124B688E8E7D0908 --scan-executable /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app/PriceRecorder.debug.dylib --scan-folder /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app/Frameworks --scan-folder /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app/PlugIns --scan-folder /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app/SystemExtensions --scan-folder /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app/Extensions --platform iphoneos --toolchain /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --destination /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app/Frameworks --strip-bitcode --strip-bitcode-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip --emit-dependency-info /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/SwiftStdLibToolInputDependencies.dep --filter-for-swift-os --back-deploy-swift-span
+
+AppIntentsSSUTraining (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsnltrainingprocessor --infoplist-path /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app/Info.plist --temp-dir-path /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/ssu --bundle-id com.example.PriceRecorder --product-path /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app --extracted-metadata-path /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app/Metadata.appintents --metadata-file-list /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/PriceRecorder.DependencyMetadataFileList --source-file /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app/Info.plist --archive-ssu-assets
+2026-04-26 23:00:38.063 appintentsnltrainingprocessor[34914:3151334] Parsing options for appintentsnltrainingprocessor
+2026-04-26 23:00:38.064 appintentsnltrainingprocessor[34914:3151334] Starting AppIntents SSU YAML Generation
+2026-04-26 23:00:38.064 appintentsnltrainingprocessor[34914:3151334] No AppShortcuts found - Skipping.
+
+CodeSign /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app/PriceRecorder.debug.dylib (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+    Signing Identity:     "Apple Development: 651877842@qq.com (7V2749KFKL)"
+    Provisioning Profile: "iOS Team Provisioning Profile: com.example.PriceRecorder"
+                          (d139a1c6-33dd-47db-bdb1-def7d903436a)
+    
+    /usr/bin/codesign --force --sign C392BAB7A9D24828810BD7E2124B688E8E7D0908 --timestamp\=none --generate-entitlement-der /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app/PriceRecorder.debug.dylib
+
+CodeSign /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app/__preview.dylib (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+    Signing Identity:     "Apple Development: 651877842@qq.com (7V2749KFKL)"
+    Provisioning Profile: "iOS Team Provisioning Profile: com.example.PriceRecorder"
+                          (d139a1c6-33dd-47db-bdb1-def7d903436a)
+    
+    /usr/bin/codesign --force --sign C392BAB7A9D24828810BD7E2124B688E8E7D0908 --timestamp\=none --generate-entitlement-der /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app/__preview.dylib
+
+CodeSign /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    
+    Signing Identity:     "Apple Development: 651877842@qq.com (7V2749KFKL)"
+    Provisioning Profile: "iOS Team Provisioning Profile: com.example.PriceRecorder"
+                          (d139a1c6-33dd-47db-bdb1-def7d903436a)
+    
+    /usr/bin/codesign --force --sign C392BAB7A9D24828810BD7E2124B688E8E7D0908 --entitlements /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Intermediates.noindex/PriceRecorder.build/Debug-iphoneos/PriceRecorder.build/PriceRecorder.app.xcent --timestamp\=none --generate-entitlement-der /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app
+
+RegisterExecutionPolicyException /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    builtin-RegisterExecutionPolicyException /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app
+
+Validate /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    builtin-validationUtility /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app -shallow-bundle -infoplist-subpath Info.plist
+
+Touch /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app (in target 'PriceRecorder' from project 'PriceRecorder')
+    cd /Users/liuxl/workspace/PriceRecorder
+    /usr/bin/touch -c /Users/liuxl/Library/Developer/Xcode/DerivedData/PriceRecorder-gxglsjtxjaxfxlbuzwmdqxvzdphn/Build/Products/Debug-iphoneos/PriceRecorder.app
+
+** BUILD SUCCEEDED **
+

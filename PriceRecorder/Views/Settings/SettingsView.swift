@@ -19,6 +19,7 @@ struct SettingsView: View {
     @State private var showingClearDataAlert = false
     @State private var showingStatistics = false
     @State private var showingAPIConfig = false
+    @State private var showingLLMConfig = false
     @State private var showingDebugConfig = false
     @AppStorage("isICloudBackupEnabled") private var isICloudBackupEnabled = false
 
@@ -35,7 +36,7 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             List {
-                Section("豆包配置") {
+                Section("AI配置") {
                     Button(action: {
                         showingAPIConfig = true
                     }) {
@@ -44,6 +45,20 @@ struct SettingsView: View {
                                 .foregroundColor(.blue)
                                 .frame(width: 30)
                             Text("豆包链接配置")
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+
+                    Button(action: {
+                        showingLLMConfig = true
+                    }) {
+                        HStack {
+                            Image(systemName: "brain.head.profile")
+                                .foregroundColor(.blue)
+                                .frame(width: 30)
+                            Text("大模型配置")
                             Spacer()
                             Image(systemName: "chevron.right")
                                 .foregroundColor(.secondary)
@@ -185,6 +200,11 @@ struct SettingsView: View {
             }
             .navigationDestination(isPresented: $showingAPIConfig) {
                 APIConfigView(config: currentConfig)
+            }
+            .sheet(isPresented: $showingLLMConfig) {
+                NavigationStack {
+                    LLMConfigView()
+                }
             }
             .sheet(isPresented: $showingDebugConfig) {
                 DebugConfigView()

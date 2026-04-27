@@ -153,17 +153,25 @@ class OCRService {
         if let quantity = parseQuantity(&name) {
             return PendingProduct(
                 name: name,
+                brand: nil,
                 quantity: quantity,
                 unit: "个",
-                totalPrice: price
+                spec: nil,
+                totalPrice: price,
+                notes: nil,
+                receiptPhoto: nil
             )
         }
 
         return PendingProduct(
             name: name.isEmpty ? "未知商品" : name,
+            brand: nil,
             quantity: 1,
             unit: "个",
-            totalPrice: price
+            spec: nil,
+            totalPrice: price,
+            notes: nil,
+            receiptPhoto: nil
         )
     }
 
@@ -195,4 +203,69 @@ struct PendingProduct: Identifiable {
     var spec: String?
     var totalPrice: Double
     var notes: String?
+    var receiptPhoto: Data?
+}
+
+/// 照片质量选项
+enum PhotoQuality: String, CaseIterable, Identifiable {
+    case compressed = "compressed"
+    case original = "original"
+
+    var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .compressed: return "压缩图（推荐）"
+        case .original: return "原图"
+        }
+    }
+
+    var compressionQuality: CGFloat {
+        switch self {
+        case .compressed: return 0.7
+        case .original: return 1.0
+        }
+    }
+
+    var maxDimension: CGFloat {
+        switch self {
+        case .compressed: return 1024
+        case .original: return CGFloat.greatestFiniteMagnitude
+        }
+    }
+}
+
+/// 照片处理服务
+class PhotoService {
+    static let shared = PhotoService()
+
+    private init() {}
+
+    /// 按照指定质量处理图片
+    func processImage(_ image: UIImage, quality: PhotoQuality) -> Data? {
+        let scaledImage = scaleImage(image, maxDimension: quality.maxDimension)
+        return scaledImage.jpegData(compressionQuality: quality.compressionQuality)
+    }
+
+    /// 缩放图片到最大尺寸
+    private func scaleImage(_ image: UIImage, maxDimension: CGFloat) -> UIImage {
+        if maxDimension == .greatestFiniteMagnitude {
+            return image
+        }
+
+        let width = image.size.width
+        let height = image.size.height
+
+        guard width > maxDimension || height > maxDimension else {
+            return image
+        }
+
+        let scale = min(maxDimension / width, maxDimension / height)
+        let newSize = CGSize(width: width * scale, height: height * scale)
+
+        let renderer = UIGraphicsImageRenderer(size: newSize)
+        return renderer.image { _ in
+            image.draw(in: CGRect(origin: .zero, size: newSize))
+        }
+    }
 }

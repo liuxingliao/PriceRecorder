@@ -18,7 +18,10 @@ struct PriceRecorderApp: App {
             Merchant.self,
             MerchantCategory.self,
             Receipt.self,
-            APIConfig.self
+            APIConfig.self,
+            LLMConfig.self,
+            AIMessage.self,
+            AISession.self
         ])
 
         let storeURL = Self.storeURL
@@ -78,5 +81,8 @@ struct MainTabView: View {
 
 #Preview {
     MainTabView()
-        .modelContainer(for: [ProductRecord.self, Merchant.self, APIConfig.self], inMemory: true)
+        .modelContainer(for: [
+            ProductRecord.self, Merchant.self, APIConfig.self,
+            LLMConfig.self, AIMessage.self, AISession.self
+        ], inMemory: true)
 }

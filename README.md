@@ -2,7 +2,7 @@
 
 ## 项目简介
 
-这是一个用于记录和比较不同商家商品价格的iOS应用，支持豆包智能录入、数据导入导出、iCloud备份等功能。
+这是一个用于记录和比较不同商家商品价格的iOS应用，支持豆包智能录入、数据导入导出、数据备份等功能。
 
 ## 技术栈
 
@@ -20,6 +20,9 @@ PriceRecorder/
 ├── README.md                          # 本说明文档
 ├── 需求文档.md                        # 详细需求文档
 ├── 测试文档.md                        # 测试文档
+├── 设计文档.md                        # 设计文档
+├── 编译和运行指南.md                # 编译指南
+├── 代码文档.md                        # 代码文档
 └── PriceRecorder/
     ├── PriceRecorderApp.swift         # 主应用入口
     ├── Info.plist                     # 应用配置
@@ -28,30 +31,40 @@ PriceRecorder/
     │   ├── Merchant.swift
     │   ├── MerchantCategory.swift
     │   ├── Receipt.swift
-    │   └── APIConfig.swift
+    │   ├── APIConfig.swift
+    │   ├── AIMessage.swift            # AI对话消息模型
+    │   ├── LLMConfig.swift            # 大模型配置模型
+    │   └── LLMDebugLog.swift          # 大模型调试日志模型
     ├── Views/                         # 页面视图
     │   ├── Home/
     │   │   ├── HomeView.swift        # 首页
     │   │   └── ProductDetailView.swift
     │   ├── Search/
-    │   │   └── SearchView.swift      # 搜索页
+    │   │   ├── SearchView.swift      # 搜索页
+    │   │   └── AIChatView.swift      # AI咨询对话页
     │   ├── Settings/
     │   │   ├── SettingsView.swift
     │   │   ├── MerchantManagementView.swift
     │   │   ├── DataManagementView.swift
     │   │   ├── StatisticsView.swift
-    │   │   └── APIConfigView.swift
+    │   │   ├── APIConfigView.swift
+    │   │   ├── LLMConfigView.swift   # 大模型配置页
+    │   │   └── DebugConfigView.swift # 调试配置页
     │   ├── ProductEntry/
     │   │   ├── ProductEntryView.swift
     │   │   └── DoubaoEntryView.swift
     │   ├── PriceComparison/
     │   │   └── PriceComparisonView.swift
     │   └── Components/
-    │       └── CommonComponents.swift
+    │       ├── CommonComponents.swift
+    │       ├── LocationPicker.swift   # 地图位置选择器
+    │       └── PhotoViewer.swift      # 照片查看器
     └── Services/                      # 服务层
         ├── OCRService.swift
         ├── CSVService.swift
-        └── CloudSyncService.swift
+        ├── CloudSyncService.swift
+        ├── LLMService.swift           # 大模型API调用服务
+        └── BackupService.swift        # 数据备份服务
 ```
 
 ## 功能特性
@@ -64,7 +77,7 @@ PriceRecorder/
 - ✅ 比价功能 - 选择商品和商家，显示历史价格趋势图
 - ✅ 商家管理 - 商家增删改查，分类管理
 - ✅ 数据导入导出 - CSV格式，全部字段，支持商家去重
-- ✅ iCloud备份 - 手动+自动备份
+- ✅ 数据备份 - 完整备份功能，支持备份选项
 - ✅ 数据统计 - 商品数、商家数、总支出等
 - ✅ 暗黑模式 - 完整支持
 
@@ -85,6 +98,16 @@ PriceRecorder/
 - 🗑️ 商品删除 - 搜索结果支持删除，编辑页底部添加删除按钮
 - 📸 照片质量 - 照片从尺寸裁剪改为质量压缩，支持10%-100%质量调节
 - 📈 数据统计 - 增加照片数量和数据占用空间统计
+- 📱 图表交互 - 比价图表支持左右滑动查看更多数据，点击/长按显示详细价格和购买时间
+- 📊 图表时间范围 - 图表支持日/周/月/年时间范围切换
+- 📊 统计增强 - 数据统计页面显示所有商家列表，点击商家弹窗显示消费额、商品数、分类统计
+- 💾 数据备份 - 完整的数据备份功能，包括照片备份和恢复
+- 📋 备份选项 - 支持选择备份内容：全部备份/仅备份数据/仅备份照片
+- 🤖 AI咨询 - 搜索页面添加AI咨询入口，支持与大模型对话查询数据分析
+- ⚙️ 大模型配置 - 支持豆包、OpenAI、Claude、阿里云、百度等多种大模型配置
+- 🧪 接口测试 - 大模型配置页面支持一键测试API连接
+- 🔧 调试配置 - 添加调试配置页面，支持查看大模型API调用日志
+- 🔤 输入限制 - 所有输入字段添加合理的字符长度限制
 
 ## 如何使用
 
@@ -109,6 +132,16 @@ PriceRecorder/
 ### 配置豆包链接
 
 在"设置" → "豆包配置"中可以配置自定义的豆包链接。
+
+### 数据备份使用说明
+
+1. 在"设置" → "数据管理"中选择"创建备份"
+2. 选择备份内容：
+   - 全部备份：备份所有数据和照片
+   - 仅备份数据：只备份商品、商家等数据（不含照片）
+   - 仅备份照片：只备份照片数据
+3. 备份文件保存到文件App中
+4. 恢复时选择备份文件，可选择恢复内容
 
 ## 编译测试
 

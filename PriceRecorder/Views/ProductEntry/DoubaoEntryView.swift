@@ -164,7 +164,8 @@ struct DoubaoEntryView: View {
                     unit: item.unit,
                     spec: item.spec,
                     totalPrice: item.totalPrice,
-                    notes: nil
+                    notes: nil,
+                    receiptPhoto: nil
                 )
             }
 
@@ -322,7 +323,7 @@ struct DoubaoProductListView: View {
                 totalPrice: pending.totalPrice,
                 merchantID: merchantID,
                 purchaseDate: purchaseDate,
-                receiptPhoto: nil,
+                receiptPhoto: pending.receiptPhoto,
                 notes: pending.notes
             )
             modelContext.insert(product)
